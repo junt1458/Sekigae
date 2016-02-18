@@ -14,7 +14,6 @@
 		23760D6F1C5DCD3C005438D6 /* desk.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D6E1C5DCD3C005438D6 /* desk.png */; };
 		23955D7E1C7057F60055A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23955D7C1C7057F60055A7B2 /* Main.storyboard */; };
 		23955D811C7058080055A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23955D7F1C7058080055A7B2 /* Main.storyboard */; };
-		23969C3B1C5DD94B001340C2 /* Regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23969C3A1C5DD94B001340C2 /* Regexp.swift */; };
 		23969C3D1C5DE31E001340C2 /* nodesk.png in Resources */ = {isa = PBXBuildFile; fileRef = 23969C3C1C5DE31E001340C2 /* nodesk.png */; };
 		23969C3F1C5DE932001340C2 /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = 23969C3E1C5DE932001340C2 /* woman.png */; };
 		23969C411C5DE95C001340C2 /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 23969C401C5DE95C001340C2 /* man.png */; };
@@ -64,7 +63,6 @@
 		23760D6E1C5DCD3C005438D6 /* desk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desk.png; sourceTree = "<group>"; };
 		23955D7D1C7057F60055A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "席替え/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		23955D801C7058080055A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		23969C3A1C5DD94B001340C2 /* Regexp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regexp.swift; sourceTree = "<group>"; };
 		23969C3C1C5DE31E001340C2 /* nodesk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodesk.png; sourceTree = "<group>"; };
 		23969C3E1C5DE932001340C2 /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
 		23969C401C5DE95C001340C2 /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				23C20A981C5C70E300ECE859 /* Assets.xcassets */,
 				23E2F6F81C7439F400F855B9 /* AppData.swift */,
 				23FC50A61C6DE58000BF6250 /* DebugSet.swift */,
-				23969C3A1C5DD94B001340C2 /* Regexp.swift */,
 				23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */,
 				23C20AF91C5C865900ECE859 /* UsageViewController.swift */,
 				23C20AFB1C5C87F600ECE859 /* InfoViewController.swift */,
@@ -359,7 +356,6 @@
 				23C20AFE1C5C952300ECE859 /* NinzuuViewController.swift in Sources */,
 				23E2F6F91C7439F400F855B9 /* AppData.swift in Sources */,
 				23C20B021C5CAC1900ECE859 /* M_WSetViewController.swift in Sources */,
-				23969C3B1C5DD94B001340C2 /* Regexp.swift in Sources */,
 				23E989EB1C6F19E4001F656E /* ResultViewController.swift in Sources */,
 				23C20A941C5C70E300ECE859 /* ViewController.swift in Sources */,
 				23D2BE7F1C69E0A500ADCB90 /* SetNameViewController.swift in Sources */,
