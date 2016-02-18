@@ -13,7 +13,7 @@ class AppData {
     //
     // ホームページ関連の定数の定義
     //
-    static let baseurl = "http://junt58-no-macbook-pro.local/"   //ホームページのURL
+    static let baseurl = "http://******-no-macbook-pro.local/"   //ホームページのURL
     static let dir = "iOSApp/SeatChange/"                        //ページのディレクトリ
     static let usagePage = "usage.html"                          //使い方ページのファイル名
     static let infoPage = "info.php"                             //お知らせページのファイル名
