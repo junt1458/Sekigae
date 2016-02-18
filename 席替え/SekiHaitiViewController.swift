@@ -10,10 +10,6 @@ import UIKit
 
 class SekiHaitiViewController: UIViewController {
 
-    var sekistatus = [Bool]()
-    var maxcount : Int = 0
-    var mancount : Int = 0
-    var womancount : Int = 0
     @IBOutlet var nextBtn: UIButton!
     @IBOutlet var label: UILabel!
     
@@ -32,13 +28,21 @@ class SekiHaitiViewController: UIViewController {
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
-                            sekistatus.append(false)
-                            if (num + 1) <= maxcount {
-                                sekistatus[num] = true
-                                btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
-                            }else{
-                                sekistatus[num] = false
-                                btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                            if AppData.sekistatus.count != AppData.CountLimit {
+                                AppData.sekistatus.append(false)
+                                if (num + 1) <= AppData.maxcount {
+                                    AppData.sekistatus[num] = true
+                                    btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
+                                }else{
+                                    AppData.sekistatus[num] = false
+                                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                                }
+                            } else {
+                                if AppData.sekistatus[num] {
+                                    btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
+                                } else {
+                                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                                }
                             }
                         }
                         break;
@@ -67,12 +71,12 @@ class SekiHaitiViewController: UIViewController {
         var numstr = btn.currentTitle!
         numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
         let num = Int(numstr)! - 1
-        if sekistatus[num] {
-            sekistatus[num] = false
+        if AppData.sekistatus[num] {
+            AppData.sekistatus[num] = false
             btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
             checkbtnandupdlbl()
         } else {
-            sekistatus[num] = true
+            AppData.sekistatus[num] = true
             btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
             checkbtnandupdlbl()
         }
@@ -80,26 +84,22 @@ class SekiHaitiViewController: UIViewController {
     }
     
     func checkbtnandupdlbl(){
+        if AppData.maxcount == 0 {
+            AppData.loadData()
+        }
         var truecnt: Int = 0
-        for b in sekistatus {
+        for b in AppData.sekistatus {
             if b {
                 truecnt++
             }
         }
-        if truecnt == maxcount {
+        if truecnt == AppData.maxcount {
             nextBtn.enabled = true
         }else{
             nextBtn.enabled = false
         }
-        label.text = String(truecnt) + "/" + String(maxcount)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController as! M_WSetViewController
-        vc.maxcount = maxcount
-        vc.womancount = womancount
-        vc.mancount = mancount
-        vc.sekistatus = sekistatus
+        NSLog("maxcount: %d", AppData.maxcount)
+        label.text = String(truecnt) + "/" + String(AppData.maxcount)
     }
     
     /*

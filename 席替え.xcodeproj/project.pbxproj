@@ -31,6 +31,7 @@
 		23C20B021C5CAC1900ECE859 /* M_WSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20B011C5CAC1900ECE859 /* M_WSetViewController.swift */; };
 		23D2BE7F1C69E0A500ADCB90 /* SetNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D2BE7E1C69E0A500ADCB90 /* SetNameViewController.swift */; };
 		23D2BE811C6B23C100ADCB90 /* CheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D2BE801C6B23C100ADCB90 /* CheckViewController.swift */; };
+		23E2F6F91C7439F400F855B9 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2F6F81C7439F400F855B9 /* AppData.swift */; };
 		23E989EB1C6F19E4001F656E /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E989EA1C6F19E4001F656E /* ResultViewController.swift */; };
 		23FC50A41C6DD2ED00BF6250 /* SeatSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC50A31C6DD2ED00BF6250 /* SeatSetViewController.swift */; };
 		23FC50A71C6DE58000BF6250 /* DebugSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC50A61C6DE58000BF6250 /* DebugSet.swift */; };
@@ -86,6 +87,7 @@
 		23C20B011C5CAC1900ECE859 /* M_WSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = M_WSetViewController.swift; sourceTree = "<group>"; };
 		23D2BE7E1C69E0A500ADCB90 /* SetNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetNameViewController.swift; sourceTree = "<group>"; };
 		23D2BE801C6B23C100ADCB90 /* CheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckViewController.swift; path = ../CheckViewController.swift; sourceTree = "<group>"; };
+		23E2F6F81C7439F400F855B9 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		23E989EA1C6F19E4001F656E /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		23FC50A31C6DD2ED00BF6250 /* SeatSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatSetViewController.swift; sourceTree = "<group>"; };
 		23FC50A61C6DE58000BF6250 /* DebugSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugSet.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				23C20A9A1C5C70E400ECE859 /* LaunchScreen.storyboard */,
 				23C20A9D1C5C70E400ECE859 /* Info.plist */,
 				23C20A981C5C70E300ECE859 /* Assets.xcassets */,
+				23E2F6F81C7439F400F855B9 /* AppData.swift */,
 				23FC50A61C6DE58000BF6250 /* DebugSet.swift */,
 				23969C3A1C5DD94B001340C2 /* Regexp.swift */,
 				23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */,
@@ -354,6 +357,7 @@
 				23FC50A71C6DE58000BF6250 /* DebugSet.swift in Sources */,
 				23FC50A91C6EEE5E00BF6250 /* SelectNameViewController.swift in Sources */,
 				23C20AFE1C5C952300ECE859 /* NinzuuViewController.swift in Sources */,
+				23E2F6F91C7439F400F855B9 /* AppData.swift in Sources */,
 				23C20B021C5CAC1900ECE859 /* M_WSetViewController.swift in Sources */,
 				23969C3B1C5DD94B001340C2 /* Regexp.swift in Sources */,
 				23E989EB1C6F19E4001F656E /* ResultViewController.swift in Sources */,

@@ -12,10 +12,6 @@ class ResultViewController: UIViewController {
     
     var btnlocations: [CGPoint]!
     var btnsize: [CGFloat]!
-    var sekistatus: [Bool]!
-    var m_wstatus: [Bool]!
-    var People_Data: [People_Information]!
-    var Seat_Data: [Int]!
     var labels = [UILabel]()
     var imageviews = [UIImageView]()
     var vc: CheckViewController!
@@ -102,7 +98,7 @@ class ResultViewController: UIViewController {
         let n = num - a * 8
         var notused = true
         for i in 0 ..< 6 {
-            if sekistatus[n + 8 * i] {
+            if AppData.sekistatus[n + 8 * i] {
                 notused = false
                 NSLog("%d列は使われています。", retsu)
                 break;
@@ -114,29 +110,41 @@ class ResultViewController: UIViewController {
     func tyuusen(){
         var manData = getData(true)
         var womanData = getData(false)
-        for i in 0 ..< Seat_Data.count {
-            if Seat_Data[i] != -1 {
-                let data = People_Data[Seat_Data[i]]
-                labels[i].text = People_Data[Seat_Data[i]].Name
-                if m_wstatus[i] {
-                    manData.removeAtIndex(getArrayIndex(m_wstatus[i], manData: manData, womanData: womanData, data: data))
+        for i in 0 ..< AppData.Seat_Data.count {
+            if AppData.Seat_Data[i] != -1 {
+                let data = AppData.People_Data[AppData.Seat_Data[i]]
+                labels[i].text = AppData.People_Data[AppData.Seat_Data[i]].Name
+                if AppData.m_wstatus[i] {
+                    manData.removeAtIndex(getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                 }else{
-                    womanData.removeAtIndex(getArrayIndex(m_wstatus[i], manData: manData, womanData: womanData, data: data))
+                    womanData.removeAtIndex(getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                 }
             }
         }
         for i in 0 ..< labels.count {
-            if sekistatus[i] {
-                if Seat_Data[i] == -1 {
-                    if m_wstatus[i] {
-                        let index:Int = Int(arc4random_uniform(UInt32(manData.count)))
+            if AppData.sekistatus[i] {
+                if AppData.Seat_Data[i] == -1 {
+                    if AppData.m_wstatus[i] {
+                        var index:Int = Int(arc4random_uniform(UInt32(manData.count)))
+                        var dcount = 0
+                        while dcount < 10 && AppData.Before_Data[i] == manData[index].AllNumber {
+                            dcount++
+                            index = Int(arc4random_uniform(UInt32(manData.count)))
+                        }
                         let data = manData[index]
                         labels[i].text = data.Name
+                        AppData.Seat_Data[i] = data.AllNumber
                         manData.removeAtIndex(index)
                     } else {
-                        let index:Int = Int(arc4random_uniform(UInt32(womanData.count)))
+                        var index:Int = Int(arc4random_uniform(UInt32(womanData.count)))
+                        var dcount = 0
+                        while dcount < 10 && AppData.Before_Data[i] == womanData[index].AllNumber {
+                            dcount++
+                            index = Int(arc4random_uniform(UInt32(womanData.count)))
+                        }
                         let data = womanData[index]
                         labels[i].text = data.Name
+                        AppData.Seat_Data[i] = data.AllNumber
                         womanData.removeAtIndex(index)
                     }
                 }
@@ -149,85 +157,12 @@ class ResultViewController: UIViewController {
                 imageviews[i] = img
             }
         }
-        /*for i in 0 ..< labels.count {
-        if sekistatus[i] {
-        if Seat_Data[i] != -1 {
-        labels[i].text = People_Data[Seat_Data[i]].Name
-        if m_wstatus[i] {
-        manData.removeAtIndex(getArrayIndex(m_wstatus[i], manData: manData, womanData: womanData, data: People_Data[Seat_Data[i]]))
-        } else {
-        womanData.removeAtIndex(getArrayIndex(m_wstatus[i], manData: manData, womanData: womanData, data: People_Data[Seat_Data[i]]))
-        }
-        } else {
-        let array = getRandom(m_wstatus[i], manData: manData, womanData: womanData)
-        let num = array[0] as! Int
-        let data = array[1] as! People_Information
-        labels[i].text = data.Name
-        if data.isMan! {
-        manData.removeAtIndex(num)
-        } else {
-        womanData.removeAtIndex(num)
-        }
-        }
-        } else {
-        imageviews[i].removeFromSuperview()
-        let img :UIImageView = UIImageView(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
-        img.center = btnlocations[i]
-        img.image = UIImage(named: "nodesk.png")
-        self.view.addSubview(img)
-        imageviews[i] = img
-        }
-        }*/
     }
-    
-    
-    //
-    //  データが入った配列を返します。
-    //  配列の中身
-    //    0: int型(ランダム生成された番号)
-    //    1: People_Information(取得したデータ)
-    //
-    /* func getRandom(isMan: Bool, manData: [People_Information], womanData: [People_Information]) -> [AnyObject] {
-    var array = [AnyObject]()
-    if isMan {
-    let index:Int = Int(arc4random_uniform(UInt32(manData.count)))
-    if manData[index].SeatNumber == -1 {
-    array.append(index)
-    array.append(manData[index])
-    return array
-    } else {
-    NSLog("席設定済みのユーザー")
-    return getRandom(isMan, manData: manData, womanData: womanData)
-    }
-    } else {
-    let index:Int = Int(arc4random_uniform(UInt32(womanData.count)))
-    if womanData[index].SeatNumber == -1 {
-    array.append(index)
-    array.append(womanData[index])
-    return array
-    } else {
-    NSLog("席設定済みのユーザー")
-    return getRandom(isMan, manData: manData, womanData: womanData)
-    }
-    }
-    }*/
-    
-    /*  func getRandom(isMan: Bool, manData: [People_Information], womanData: [People_Information]) -> People_Information {
-    if isMan {
-    let index = Int(arc4random_uniform(UInt32(manData.count)))
-    if manData[index].SeatNumber == -1 {
-    return manData[index]
-    } else {
-    return getRandom(isMan, manData: manData, womanData: womanData)
-    }
-    }
-    return People_Information(isMan: false, isSetSeat: false, SeatNumber: -1, Name: "Nil", Number: -1, AllNumber: -1)
-    }*/
     
     func getData(manData: Bool) -> [People_Information] {
         var array = [People_Information]()
-        for a in 0 ..< People_Data.count {
-            let i = People_Data[a]
+        for a in 0 ..< AppData.People_Data.count {
+            let i = AppData.People_Data[a]
             if manData {
                 if i.isMan! {
                     array.append(i)
@@ -239,6 +174,36 @@ class ResultViewController: UIViewController {
             }
         }
         return array
+    }
+    
+    @IBAction func close(sender: AnyObject){
+        let alert = UIAlertController(title: "終了", message: "終了しますか？", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "はい", style: UIAlertActionStyle.Default, handler: {action in
+            let alert2 = UIAlertController(title: "確認", message: "今回のデータを保存しますか？", preferredStyle: .Alert)
+            alert2.addAction(UIAlertAction(title: "はい", style: UIAlertActionStyle.Default, handler: {action in
+                AppData.saveData()
+                let alert3 = UIAlertController(title: "完了", message: "保存しました", preferredStyle: .Alert)
+                alert3.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {action in
+                    self.performSegueWithIdentifier("FirstSegue", sender: sender)
+                    AppData.formatTempData()
+                }))
+                self.presentViewController(alert3, animated: true, completion: nil)
+            }))
+            alert2.addAction(UIAlertAction(title: "いいえ", style: UIAlertActionStyle.Default, handler: {action in
+                let alert3 = UIAlertController(title: "注意", message: "今回のデータは保存されません。\n本当に終了してもよろしいですか？", preferredStyle: .Alert)
+                alert3.addAction(UIAlertAction(title: "はい", style: UIAlertActionStyle.Default, handler: {action in
+                    self.performSegueWithIdentifier("FirstSegue", sender: sender)
+                    AppData.formatTempData()
+                }))
+                alert3.addAction(UIAlertAction(title: "いいえ", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert3, animated: true, completion: nil)
+            }))
+            self.presentViewController(alert2, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "いいえ", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+        
+        //FirstSegue
     }
     
     /*

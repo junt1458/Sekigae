@@ -84,9 +84,9 @@ class NinzuuViewController: UIViewController {
         } else {
             man = Int(manField.text!)!
             woman = Int(womanField.text!)!
-            if (man + woman) > 48 {
+            if (man + woman) > AppData.CountLimit {
                 invalid = true
-                msg = "人数を48人より多くすることはできません。"
+                msg = String(format: "人数を%d人より多くすることはできません。", AppData.CountLimit)
             } else if (man + woman) <= 0 {
                 invalid = true
                 msg = "人数を0人以下にすることはできません。"
@@ -104,13 +104,24 @@ class NinzuuViewController: UIViewController {
             performSegueWithIdentifier("NextSegue", sender: sender)
         }
     }
+    
+    @IBAction func LoadBeforeData(sender: AnyObject){
+        AppData.loadData()
+        if (AppData.mancount + AppData.womancount) > AppData.CountLimit || (AppData.mancount + AppData.womancount) <= 0 {
+            let msg = String(format: "読み込むデータがありませんでした。", AppData.CountLimit)
+            let alert = UIAlertController(title: "エラー", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        }else{
+            performSegueWithIdentifier("NextSegue", sender: sender)
+        }
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController as! SekiHaitiViewController
         let max = man + woman
-        vc.maxcount = max
-        vc.womancount = woman
-        vc.mancount = man
+        AppData.maxcount = max
+        AppData.womancount = woman
+        AppData.mancount = man
     }
 
     @IBAction func back(){

@@ -10,11 +10,7 @@ import UIKit
 
 class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
 
-    var People_Data : [People_Information]!
     var selectedIndex: Int!
-    var mancount : Int!
-    var womancount : Int!
-    var vc: CheckViewController!
     
     @IBOutlet var tableview: UITableView!
     
@@ -33,24 +29,22 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func CheckandCreateData(){
         var flag = false
-        if People_Data == nil {
-            flag = true
-        } else if People_Data.count <= 0 {
+        if AppData.People_Data.count <= 0 {
             flag = true
         } else {
             flag = false
         }
         if flag {
-            People_Data = [People_Information]()
-            for i in 0 ..< mancount + womancount {
-                if i < mancount {
+            AppData.People_Data = [People_Information]()
+            for i in 0 ..< AppData.mancount + AppData.womancount {
+                if i < AppData.mancount {
                     let pi = People_Information(isMan: true, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
-                    People_Data.append(pi)
+                    AppData.People_Data.append(pi)
                     NSLog("男,%d", i + 1)
                 }else{
-                    let pi = People_Information(isMan: false, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - mancount), Number: i + 1 - mancount, AllNumber: i)
-                    People_Data.append(pi)
-                    NSLog("女,%d", i - mancount + 1)
+                    let pi = People_Information(isMan: false, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
+                    AppData.People_Data.append(pi)
+                    NSLog("女,%d", i - AppData.mancount + 1)
                 }
             }
         }
@@ -63,12 +57,11 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     @IBAction func back(){
-        vc.People_Data = self.People_Data
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func checkbox(checked: Int){
-        for row in 0 ..< People_Data.count {
+        for row in 0 ..< AppData.People_Data.count {
             let indexPath = NSIndexPath(forRow: row, inSection: 0)
             let cell = tableview.cellForRowAtIndexPath(indexPath)
             if row == checked {
@@ -81,11 +74,11 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func save(goNext: Bool){
         if selectedIndex != nil {
-            People_Data[selectedIndex].Name = nameBox.text
+            AppData.People_Data[selectedIndex].Name = nameBox.text
             tableview.reloadData()
-            if goNext && mancount + womancount >= selectedIndex + 2 {
+            if goNext && AppData.mancount + AppData.womancount >= selectedIndex + 2 {
                 selectedIndex = selectedIndex + 1
-                let pi = People_Data[selectedIndex]
+                let pi = AppData.People_Data[selectedIndex]
                 var seibetu = "女"
                 if pi.isMan! {
                     seibetu = "男"
@@ -105,7 +98,7 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let pi = People_Data[indexPath.row]
+        let pi = AppData.People_Data[indexPath.row]
         var seibetu = "女"
         if pi.isMan! {
             seibetu = "男"
@@ -120,16 +113,16 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return People_Data.count
+        return AppData.People_Data.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
         var seibetu = "女"
-        if People_Data[indexPath.row].isMan! {
+        if AppData.People_Data[indexPath.row].isMan! {
             seibetu = "男"
         }
-        cell.textLabel?.text = String(format: "No.%d," + People_Data[indexPath.row].Name + "," + seibetu, People_Data[indexPath.row].Number)
+        cell.textLabel?.text = String(format: "No.%d," + AppData.People_Data[indexPath.row].Name + "," + seibetu, AppData.People_Data[indexPath.row].Number)
         return cell
     }
     

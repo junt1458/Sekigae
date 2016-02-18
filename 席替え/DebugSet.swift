@@ -10,4 +10,6 @@ import Foundation
 
 class DebugSet {
     static let debug = false
+    static let autoLoad = false
+    static let noLoad = false
 }

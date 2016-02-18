@@ -47,6 +47,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eYH-7Q-FvA">
+                                <rect key="frame" x="487" y="290" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="データ削除"/>
+                                <connections>
+                                    <action selector="resetData" destination="BYZ-38-t0r" eventType="touchUpInside" id="GID-Xh-qJ1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -56,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-217" y="99"/>
+            <point key="canvasLocation" x="-217" y="51"/>
         </scene>
         <!--Usage View Controller-->
         <scene sceneID="uB0-Fs-nsp">
@@ -180,6 +188,14 @@
                                     <action selector="done" destination="A0D-sD-ds3" eventType="touchUpInside" id="lHk-lq-Ops"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pH9-3m-1q4">
+                                <rect key="frame" x="197" y="232" width="175" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="前回のデータを読み込む"/>
+                                <connections>
+                                    <action selector="LoadBeforeData:" destination="A0D-sD-ds3" eventType="touchUpInside" id="7I0-Io-RyM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -205,7 +221,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-216.53333333333333" y="592.61333333333334"/>
+            <point key="canvasLocation" x="-217" y="592"/>
         </scene>
         <!--Seki Haiti View Controller-->
         <scene sceneID="AKr-MS-dv9">
@@ -1347,6 +1363,9 @@
                                 <rect key="frame" x="17" y="270" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="閉じる"/>
+                                <connections>
+                                    <action selector="close:" destination="r2Q-xo-rrl" eventType="touchUpInside" id="XJc-eL-etk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SsR-l0-Gij">
                                 <rect key="frame" x="110" y="270" width="91" height="30"/>
@@ -1366,10 +1385,13 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="FirstSegue" id="ccZ-vq-cYI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfS-Ud-B9o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-216.53333333333333" y="2715.9866666666667"/>
+            <point key="canvasLocation" x="-217" y="2724"/>
         </scene>
     </scenes>
     <resources>

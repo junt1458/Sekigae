@@ -10,10 +10,7 @@ import UIKit
 
 class SelectNameViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    var People_Data = [People_Information]()
     var manmode: Bool!
-    var mancount: Int!
-    var womancount: Int!
     var vc: SeatSetViewController!
     var seatnum: Int!
     @IBOutlet var table: UITableView!
@@ -37,18 +34,18 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
     func getCount(man: Bool) -> Int{
         var count = 0
         if man {
-            count = mancount
+            count = AppData.mancount
         } else {
-            count = womancount
+            count = AppData.womancount
         }
         NSLog("count:%d", count)
         return count
     }
     
     @IBAction func deset(){
-        if vc.Seat_Data[seatnum] != -1 {
-            vc.People_Data[vc.Seat_Data[seatnum]].SeatNumber = -1
-            vc.Seat_Data[seatnum] = -1
+        if AppData.Seat_Data[seatnum] != -1 {
+            AppData.People_Data[AppData.Seat_Data[seatnum]].SeatNumber = -1
+            AppData.Seat_Data[seatnum] = -1
         }
         vc.redrawbtns()
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -57,25 +54,25 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if manmode! {
             NSLog("indexPath.row:%d", indexPath.row)
-            if vc.People_Data[indexPath.row].SeatNumber != -1 {
-                vc.Seat_Data[People_Data[indexPath.row].SeatNumber] = -1
-                vc.People_Data[indexPath.row].SeatNumber = -1
+            if AppData.People_Data[indexPath.row].SeatNumber != -1 {
+                AppData.Seat_Data[AppData.People_Data[indexPath.row].SeatNumber] = -1
+                AppData.People_Data[indexPath.row].SeatNumber = -1
             }
-            if vc.Seat_Data[seatnum] != -1 {
-                vc.People_Data[indexPath.row].SeatNumber = -1
+            if AppData.Seat_Data[seatnum] != -1 {
+                AppData.People_Data[indexPath.row].SeatNumber = -1
             }
-            vc.Seat_Data[seatnum] = People_Data[indexPath.row].AllNumber
-            vc.People_Data[indexPath.row].SeatNumber = seatnum
+            AppData.Seat_Data[seatnum] = AppData.People_Data[indexPath.row].AllNumber
+            AppData.People_Data[indexPath.row].SeatNumber = seatnum
         } else {
-            if vc.People_Data[indexPath.row + getCount(true)].SeatNumber != -1 {
-                vc.Seat_Data[People_Data[indexPath.row + getCount(true)].SeatNumber] = -1
-                vc.People_Data[indexPath.row + getCount(true)].SeatNumber = -1
+            if AppData.People_Data[indexPath.row + getCount(true)].SeatNumber != -1 {
+                AppData.Seat_Data[AppData.People_Data[indexPath.row + getCount(true)].SeatNumber] = -1
+                AppData.People_Data[indexPath.row + getCount(true)].SeatNumber = -1
             }
-            if vc.Seat_Data[seatnum] != -1 {
-                vc.People_Data[indexPath.row + getCount(true)].SeatNumber = -1
+            if AppData.Seat_Data[seatnum] != -1 {
+                AppData.People_Data[indexPath.row + getCount(true)].SeatNumber = -1
             }
-            vc.Seat_Data[seatnum] = People_Data[indexPath.row + getCount(true)].AllNumber
-            vc.People_Data[indexPath.row + getCount(true)].SeatNumber = seatnum
+            AppData.Seat_Data[seatnum] = AppData.People_Data[indexPath.row + getCount(true)].AllNumber
+            AppData.People_Data[indexPath.row + getCount(true)].SeatNumber = seatnum
         }
         vc.redrawbtns()
         dismissViewControllerAnimated(true, completion: nil)
@@ -93,10 +90,10 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
         if manmode! {
-            cell.textLabel?.text = String(format: "No.%d," + People_Data[indexPath.row].Name, People_Data[indexPath.row].Number)
+            cell.textLabel?.text = String(format: "No.%d," + AppData.People_Data[indexPath.row].Name, AppData.People_Data[indexPath.row].Number)
         } else {
             NSLog("indexPath.row + getCount(true) - 2 = %d", indexPath.row + getCount(true))
-            cell.textLabel?.text = String(format: "No.%d," + People_Data[indexPath.row + getCount(true)].Name, People_Data[indexPath.row + getCount(true)].Number)
+            cell.textLabel?.text = String(format: "No.%d," + AppData.People_Data[indexPath.row + getCount(true)].Name, AppData.People_Data[indexPath.row + getCount(true)].Number)
         }
         return cell
     }

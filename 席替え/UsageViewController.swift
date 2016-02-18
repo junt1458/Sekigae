@@ -12,14 +12,13 @@ class UsageViewController: UIViewController {
 
     @IBOutlet var webview: UIWebView!
     
-    var webaddress = "http://junt58-no-macbook-pro.local/iOSApp/SeatChange/usage.php"
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshControl()
         // Do any additional setup after loading the view.
-        let url = NSURL(string: webaddress)
+        let url = NSURL(string: AppData.baseurl + AppData.dir + AppData.usagePage)
         let req = NSURLRequest(URL: url!)
         webview.loadRequest(req)
     }

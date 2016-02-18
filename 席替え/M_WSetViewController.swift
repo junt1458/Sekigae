@@ -10,11 +10,6 @@ import UIKit
 
 class M_WSetViewController: UIViewController {
 
-    var sekistatus = [Bool]()
-    var m_wstatus = [Bool]()
-    var maxcount : Int = 0
-    var mancount : Int = 0
-    var womancount: Int = 0
     var btns = [UIButton]()
     var btnsize = [CGFloat]()
     
@@ -57,7 +52,7 @@ class M_WSetViewController: UIViewController {
     
     func getBtns(){
         btns = [UIButton]()
-        for i in 0 ..< sekistatus.count {
+        for i in 0 ..< AppData.sekistatus.count {
             btns.append(self.view.viewWithTag(i + 100) as! UIButton)
         }
     }
@@ -69,23 +64,41 @@ class M_WSetViewController: UIViewController {
     
     func setupbuttons(){
         var a : Int = 0
-        for i in 0 ..< sekistatus.count {
-            m_wstatus.append(true)
-            let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
-            if sekistatus[i] {
-                btn.setImage(UIImage(named: "man.png"), forState: .Normal)
-                if (i - a) >= mancount {
-                    m_wstatus[i] = false
-                    btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
+        if AppData.m_wstatus.count != AppData.CountLimit {
+            for i in 0 ..< AppData.sekistatus.count {
+                AppData.m_wstatus.append(true)
+                let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
+                if AppData.sekistatus[i] {
+                    btn.setImage(UIImage(named: "man.png"), forState: .Normal)
+                    if (i - a) >= AppData.mancount {
+                        AppData.m_wstatus[i] = false
+                        btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
+                    }
+                }else{
+                    a++
+                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                    btn.enabled = false
                 }
-            }else{
-                a++
-                btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
-                btn.enabled = false
+            }
+        } else {
+            for i in 0 ..< AppData.sekistatus.count {
+                NSLog("m_wstatus[%d]:%@", i, AppData.m_wstatus[i])
+                let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
+                if AppData.sekistatus[i] {
+                    if AppData.m_wstatus[i] {
+                        btn.setImage(UIImage(named: "man.png"), forState: .Normal)
+                    } else {
+                        btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
+                    }
+                } else {
+                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                    btn.enabled = false
+                }
             }
         }
-        label1.text = "男: " + String(mancount) + "/" + String(mancount)
-        label2.text = "女: " + String(womancount) + "/" + String(womancount)
+        NSLog("AppData.m_wstatus.count:%d", AppData.m_wstatus.count)
+        label1.text = "男: " + String(AppData.mancount) + "/" + String(AppData.mancount)
+        label2.text = "女: " + String(AppData.womancount) + "/" + String(AppData.womancount)
         nextBtn.enabled = true
     }
     
@@ -96,19 +109,19 @@ class M_WSetViewController: UIViewController {
     func updatelabels(){
         var m : Int = 0
         var w : Int = 0
-        for i in 0 ..< sekistatus.count {
-            if sekistatus[i] {
-                if m_wstatus[i] {
+        for i in 0 ..< AppData.sekistatus.count {
+            if AppData.sekistatus[i] {
+                if AppData.m_wstatus[i] {
                     m++
                 }else{
                     w++
                 }
             }
         }
-        label1.text = "男: " + String(m) + "/" + String(mancount)
-        label2.text = "女: " + String(w) + "/" + String(womancount)
+        label1.text = "男: " + String(m) + "/" + String(AppData.mancount)
+        label2.text = "女: " + String(w) + "/" + String(AppData.womancount)
         
-        if m == mancount && w == womancount {
+        if m == AppData.mancount && w == AppData.womancount {
             nextBtn.enabled = true
         }else{
             nextBtn.enabled = false
@@ -124,11 +137,11 @@ class M_WSetViewController: UIViewController {
         NSLog("成功: ボタン番号String取得")
         let num = Int(numstr)! - 1
         NSLog("成功: ボタン番号取得")
-        if m_wstatus[num] {
-           m_wstatus[num] = false
+        if AppData.m_wstatus[num] {
+           AppData.m_wstatus[num] = false
             btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
         } else {
-           m_wstatus[num] = true
+           AppData.m_wstatus[num] = true
             btn.setImage(UIImage(named: "man.png"), forState: .Normal)
         }
         updatelabels()
@@ -146,11 +159,6 @@ class M_WSetViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let vc = segue.destinationViewController as! CheckViewController
-        vc.sekistatus = self.sekistatus
-        vc.m_wstatus = self.m_wstatus
-        vc.maxcount = self.maxcount
-        vc.mancount = self.mancount
-        vc.womancount = self.womancount
         vc.btnlocations = self.getBtnLocations()
         vc.btnsize = self.btnsize
     }

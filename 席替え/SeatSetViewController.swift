@@ -10,13 +10,6 @@ import UIKit
 
 class SeatSetViewController: UIViewController {
 
-    var sekistatus = [Bool]()
-    var m_wstatus = [Bool]()
-    var Seat_Data = [Int]()
-    var People_Data = [People_Information]()
-    var vc : CheckViewController!
-    var mancount: Int!
-    var womancount: Int!
     var manmode: Bool!
     var seatnum: Int!
 
@@ -37,10 +30,10 @@ class SeatSetViewController: UIViewController {
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
-                            NSLog("SeatData[%d]:%d", num, Seat_Data[num])
-                            if Seat_Data[num] >= 0 {
-                                btn.setTitle(People_Data[Seat_Data[num]].Name, forState: .Normal)
-                                let lng:Int = Int(String(People_Data[Seat_Data[num]].Name.endIndex))!
+                            NSLog("SeatData[%d]:%d", num, AppData.Seat_Data[num])
+                            if AppData.Seat_Data[num] >= 0 {
+                                btn.setTitle(AppData.People_Data[AppData.Seat_Data[num]].Name, forState: .Normal)
+                                let lng:Int = Int(String(AppData.People_Data[AppData.Seat_Data[num]].Name.endIndex))!
                                 if lng == 5 {
                                     btn.titleLabel?.font = UIFont.systemFontOfSize(15)
                                 }else if lng == 6  || lng == 7{
@@ -77,11 +70,11 @@ class SeatSetViewController: UIViewController {
     }
     
     func redrawbtns(){
-        for i in 0 ..< sekistatus.count{
+        for i in 0 ..< AppData.sekistatus.count{
             let btn = self.view.viewWithTag(i + 100) as! UIButton
-            if Seat_Data[i] >= 0 {
-                btn.setTitle(People_Data[Seat_Data[i]].Name, forState: .Normal)
-                let lng:Int = Int(String(People_Data[Seat_Data[i]].Name.endIndex))!
+            if AppData.Seat_Data[i] >= 0 {
+                btn.setTitle(AppData.People_Data[AppData.Seat_Data[i]].Name, forState: .Normal)
+                let lng:Int = Int(String(AppData.People_Data[AppData.Seat_Data[i]].Name.endIndex))!
                 if lng == 5 {
                     btn.titleLabel?.font = UIFont.systemFontOfSize(15)
                 }else if lng == 6  || lng == 7{
@@ -103,14 +96,14 @@ class SeatSetViewController: UIViewController {
     
     func setupbuttons(){
         var a : Int = 0
-        for i in 0 ..< sekistatus.count {
-            m_wstatus.append(true)
+        for i in 0 ..< AppData.sekistatus.count {
+            AppData.m_wstatus.append(true)
             NSLog("i:%d",i)
             let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
-            if sekistatus[i] {
+            if AppData.sekistatus[i] {
                 btn.setBackgroundImage(UIImage(named: "man.png"), forState: .Normal)
                 btn.setImage(nil, forState: .Normal)
-                if !m_wstatus[i] {
+                if !AppData.m_wstatus[i] {
                     btn.setBackgroundImage(UIImage(named: "woman.png"), forState: .Normal)
                 }
             }else{
@@ -123,7 +116,6 @@ class SeatSetViewController: UIViewController {
     }
     
     @IBAction func back(){
-        vc.Seat_Data = self.Seat_Data
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -132,7 +124,7 @@ class SeatSetViewController: UIViewController {
         NSLog("成功: ボタンの取得")
         let num = btn.tag - 100
         NSLog("設定の処理をここに書く")
-        manmode = m_wstatus[num]
+        manmode = AppData.m_wstatus[num]
         seatnum = num
         performSegueWithIdentifier("SetSegue", sender: sender)
         NSLog("%d番のボタンがタップされました。", num+1)
@@ -140,10 +132,7 @@ class SeatSetViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let vc = segue.destinationViewController as! SelectNameViewController
-        vc.People_Data = self.People_Data
         vc.manmode = self.manmode
-        vc.mancount = self.mancount
-        vc.womancount = self.womancount
         vc.vc = self
         vc.seatnum = self.seatnum
     }
