@@ -11,10 +11,29 @@ import Foundation
 class AppData {
     
     //
+    // フォントサイズの設定
+    // 配列の中身
+    //   0: 5文字のとき
+    //   1: 6,7文字のとき
+    //   2: 8文字のとき
+    //   3: 9文字のとき
+    //   4: 10文字以上
+    //   5: それ以外
+    // データ
+    // size1: iPhone4s以前の端末、iPad用のデータ
+    // size2: size1以外の端末用のデータ
+    // usesize1: size1を使うか
+    //
+    static var size1: [Float] = [14.0, 10.0,   8.0,   7.0, 7.0, 17.0]
+    static var size2: [Float] = [15.0, 11.5, 9.0, 8.5, 8.0, 18.0]
+    static var usesize1: Bool = false
+    
+    
+    //
     // ホームページ関連の定数の定義
     //
-    static let baseurl = "http://******-no-macbook-pro.local/"   //ホームページのURL
-    static let dir = "iOSApp/SeatChange/"                        //ページのディレクトリ
+    static let baseurl = "http://junki-t.net/"                   //ホームページのURL
+    static let dir = "SmartPhoneApps/SeatChange/"                //ページのディレクトリ
     static let usagePage = "usage.html"                          //使い方ページのファイル名
     static let infoPage = "info.php"                             //お知らせページのファイル名
     
@@ -47,7 +66,10 @@ class AppData {
         NSLog("席の男女の設定の保存")
         userDefaults.setObject(m_wstatus, forKey: "M_W")
         NSLog("人のデータの保存")
-        userDefaults.setObject(People_Data, forKey: "P_D")
+        userDefaults.setObject(PD_DataConverter().convertAllToStringListData(People_Data), forKey: "P_D")
+        //userDefaults.setObject(People_Data, forKey: "P_D")
+        NSLog("%@", String(true))
+        
         NSLog("前回の結果の保存")
         userDefaults.setObject(Before_Data, forKey: "B_D")
         userDefaults.synchronize()
@@ -60,7 +82,7 @@ class AppData {
                 maxcount = 0
                 userDefaults.setObject(maxcount, forKey: "Max")
             }
-            if isNil(userDefaults.valueForKey("Mam")) {
+            if isNil(userDefaults.valueForKey("Man")) {
                 mancount = 0
                 userDefaults.setObject(mancount, forKey: "Man")
             }
@@ -78,7 +100,7 @@ class AppData {
             }
             if isNil(userDefaults.valueForKey("P_D")) {
                 People_Data = [People_Information]()
-                userDefaults.setObject(People_Data, forKey: "P_D")
+                userDefaults.setObject([[String]](), forKey: "P_D")
             }
             if isNil(userDefaults.valueForKey("B_D")) {
                 Before_Data = genBeforeData()
@@ -89,7 +111,7 @@ class AppData {
             womancount = userDefaults.valueForKey("Woman") as! Int
             sekistatus = userDefaults.valueForKey("Status") as! [Bool]
             m_wstatus = userDefaults.valueForKey("M_W") as! [Bool]
-            People_Data = userDefaults.valueForKey("P_D") as! [People_Information]
+            People_Data = PD_DataConverter().convertAllToPI_Data(userDefaults.valueForKey("P_D") as! [[String]])
             Before_Data = userDefaults.valueForKey("B_D") as! [Int]
             userDefaults.synchronize()
         }else{
@@ -140,7 +162,7 @@ class AppData {
         m_wstatus = [Bool]()
         userDefaults.setObject(m_wstatus, forKey: "M_W")
         People_Data = [People_Information]()
-        userDefaults.setObject(People_Data, forKey: "P_D")
+        userDefaults.setObject([[String]](), forKey: "P_D")
         Before_Data = genBeforeData()
         userDefaults.setObject(Before_Data, forKey: "B_D")
         Seat_Data = [Int]()

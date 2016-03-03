@@ -15,15 +15,38 @@ class SeatSetViewController: UIViewController {
 
     @IBOutlet var saveBtn: UIButton!
     
+    func getIndex(lng: Int) -> Int {
+        var ind: Int = lng - 5
+        if lng >= 7 {
+            ind--
+        }
+        if ind < 0 {
+            ind = 5
+        }
+        if lng > 9 {
+            ind = 4
+        }
+        NSLog("lng: %d, ind:%d, size: %f", lng, ind, Float(getSizeArray()[ind]))
+        return ind
+    }
+    
+    func getSizeArray() -> [Float] {
+        if AppData.usesize1 {
+            return AppData.size1
+        } else {
+            return AppData.size2
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        for v in self.view.subviews {
-            if v is UIButton {
-                let btn = v as! UIButton
-                for i in 0 ..< 50 {
+        for i in 0 ..< AppData.CountLimit {
+            for v in self.view.subviews {
+                if let btn = v as? UIButton {
                     let t : String = btn.currentTitle!
-                    let b : Bool = t.containsString(String(i))
+                    let b : Bool = (t == String(format: "Button%d", (i + 1)))
                     if b {
+                        NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
                             btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
@@ -34,19 +57,7 @@ class SeatSetViewController: UIViewController {
                             if AppData.Seat_Data[num] >= 0 {
                                 btn.setTitle(AppData.People_Data[AppData.Seat_Data[num]].Name, forState: .Normal)
                                 let lng:Int = Int(String(AppData.People_Data[AppData.Seat_Data[num]].Name.endIndex))!
-                                if lng == 5 {
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(15)
-                                }else if lng == 6  || lng == 7{
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(11.5)
-                                }else if lng == 8 {
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(9)
-                                } else if lng == 9{
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(8.5)
-                                } else if lng > 9{
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(8)
-                                } else {
-                                    btn.titleLabel?.font = UIFont.systemFontOfSize(18)
-                                }
+                                btn.titleLabel?.font = UIFont.systemFontOfSize(CGFloat(getSizeArray()[getIndex(lng)]))
                             } else {
                                 btn.setTitle("", forState: .Normal)
                             }
@@ -56,8 +67,6 @@ class SeatSetViewController: UIViewController {
                         break;
                     }
                 }
-            }else{
-                NSLog("ボタンではありません。")
             }
         }
         setupbuttons()
@@ -75,19 +84,7 @@ class SeatSetViewController: UIViewController {
             if AppData.Seat_Data[i] >= 0 {
                 btn.setTitle(AppData.People_Data[AppData.Seat_Data[i]].Name, forState: .Normal)
                 let lng:Int = Int(String(AppData.People_Data[AppData.Seat_Data[i]].Name.endIndex))!
-                if lng == 5 {
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(15)
-                }else if lng == 6  || lng == 7{
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(11.5)
-                }else if lng == 8 {
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(9)
-                } else if lng == 9{
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(8.5)
-                } else if lng > 9{
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(8)
-                } else {
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(18)
-                }
+                btn.titleLabel?.font = UIFont.systemFontOfSize(CGFloat(getSizeArray()[getIndex(lng)]))
             } else {
                 btn.setTitle("", forState: .Normal)
             }

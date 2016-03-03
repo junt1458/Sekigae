@@ -19,15 +19,16 @@ class M_WSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)
         btnsize.append(0)
         btnsize.append(0)
-        for v in self.view.subviews {
-            if v is UIButton {
-                let btn = v as! UIButton
-                for i in 0 ..< 50 {
+        for i in 0 ..< AppData.CountLimit {
+            for v in self.view.subviews {
+                if let btn = v as? UIButton {
                     let t : String = btn.currentTitle!
-                    let b : Bool = t.containsString(String(i))
+                    let b : Bool = (t == String(format: "Button%d", (i + 1)))
                     if b {
+                        NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
                             btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
@@ -41,13 +42,54 @@ class M_WSetViewController: UIViewController {
                         break;
                     }
                 }
-            }else{
-                NSLog("ボタンではありません。")
             }
         }
         getBtns()
         setupbuttons()
+        for i in 0 ..< AppData.CountLimit {
+            if !AppData.sekistatus[i] {
+                AppData.m_wstatus[i] = true
+            }
+        }
+        for i in 0 ..< AppData.CountLimit {
+            let btn = view.viewWithTag(i + 100) as! UIButton
+            if AppData.sekistatus[i] {
+                if AppData.m_wstatus[i] {
+                    btn.setImage(UIImage(named: "man.png"), forState: .Normal)
+                } else {
+                    btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
+                }
+            } else {
+                btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                btn.enabled = false
+            }
+        }
+        if getNinzuu(true) == AppData.mancount && getNinzuu(false) == AppData.womancount {
+            nextBtn.enabled = true
+        } else {
+            nextBtn.enabled = false
+        }
+        label1.text = "男: " + String(getNinzuu(true)) + "/" + String(AppData.mancount)
+        label2.text = "女: " + String(getNinzuu(false)) + "/" + String(AppData.womancount)
         // Do any additional setup after loading the view.
+    }
+    
+    func getNinzuu(man: Bool) -> Int {
+        var c = 0
+        if man {
+            for i in 0 ..< AppData.sekistatus.count {
+                if AppData.m_wstatus[i] && AppData.sekistatus[i] {
+                    c++
+                }
+            }
+        } else {
+            for i in 0 ..< AppData.sekistatus.count {
+                if !AppData.m_wstatus[i] {
+                    c++
+                }
+            }
+        }
+        return c
     }
     
     func getBtns(){
@@ -118,9 +160,10 @@ class M_WSetViewController: UIViewController {
                 }
             }
         }
+        NSLog("男子%d人,女子%d人", m, w)
         label1.text = "男: " + String(m) + "/" + String(AppData.mancount)
         label2.text = "女: " + String(w) + "/" + String(AppData.womancount)
-        
+        NSLog("更新")
         if m == AppData.mancount && w == AppData.womancount {
             nextBtn.enabled = true
         }else{

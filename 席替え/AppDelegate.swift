@@ -16,6 +16,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        // デバイスの取得
+        let device = UIDevice.currentDevice()
+        // デバイスのモデル名によって、Storyboardの名称を分岐
+        var sbName = "Main"
+        if device.model.hasPrefix("iPhone") {
+            // 4s以前かどうかは、スクリーンサイズで判別する
+            let screenSize = UIScreen.mainScreen().bounds.size
+            if screenSize.width <= 480.0 { // 高さ480ピクセル以下なら、4s
+                sbName = "iPhone4s"
+                AppData.usesize1 = true
+            } else {
+                AppData.usesize1 = false
+            }
+        } else if device.model.hasPrefix("iPad") {
+            sbName = "iPhone4s"
+            AppData.usesize1 = true
+        }
+        // 名称からStoryboardを呼んで、ViewControllerをインスタンス化
+        let storyboard = UIStoryboard(name: sbName, bundle: nil)
+        if let viewController = storyboard.instantiateInitialViewController() {
+            // メインウインドウのrootViewControllerに指定
+            self.window?.rootViewController = viewController
+        }
+        
         return true
     }
 

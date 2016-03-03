@@ -28,15 +28,15 @@ class CheckViewController: UIViewController {
                     if i > AppData.mancount {
                         isMan = false
                     }
-                    let pi = People_Information(isMan: isMan, isSetSeat: false, SeatNumber: -1, Name: getName(i + 1), Number: i + 1, AllNumber: i)
+                    let pi = People_Information(isMan: isMan, SeatNumber: -1, Name: getName(i + 1), Number: i + 1, AllNumber: i)
                     AppData.People_Data.append(pi)
                 } else {
                     if i < AppData.mancount {
-                        let pi = People_Information(isMan: true, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
+                        let pi = People_Information(isMan: true, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
                         AppData.People_Data.append(pi)
                         NSLog("男,%d", i + 1)
                     }else{
-                        let pi = People_Information(isMan: false, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
+                        let pi = People_Information(isMan: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
                         AppData.People_Data.append(pi)
                         NSLog("女,%d", i - AppData.mancount + 1)
                     }

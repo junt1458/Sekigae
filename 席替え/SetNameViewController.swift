@@ -38,11 +38,11 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
             AppData.People_Data = [People_Information]()
             for i in 0 ..< AppData.mancount + AppData.womancount {
                 if i < AppData.mancount {
-                    let pi = People_Information(isMan: true, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
+                    let pi = People_Information(isMan: true, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
                     AppData.People_Data.append(pi)
                     NSLog("男,%d", i + 1)
                 }else{
-                    let pi = People_Information(isMan: false, isSetSeat: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
+                    let pi = People_Information(isMan: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
                     AppData.People_Data.append(pi)
                     NSLog("女,%d", i - AppData.mancount + 1)
                 }

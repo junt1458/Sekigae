@@ -15,13 +15,49 @@ class SekiHaitiViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for v in self.view.subviews {
+        for i in 0 ..< AppData.CountLimit {
+            for v in self.view.subviews {
+                if let btn = v as? UIButton {
+                    let t : String = btn.currentTitle!
+                    let b : Bool = (t == String(format: "Button%d", (i + 1)))
+                    if b {
+                        NSLog("ボタン発見。名前: " + t)
+                        if btn.allTargets().count == 0 {
+                            NSLog("ボタンです。名前: " + t)
+                            btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
+                            var numstr = btn.currentTitle!
+                            numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
+                            let num = Int(numstr)! - 1
+                            if AppData.sekistatus.count != AppData.CountLimit {
+                                AppData.sekistatus.append(false)
+                                if (num + 1) <= AppData.maxcount {
+                                    AppData.sekistatus[num] = true
+                                    btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
+                                }else{
+                                    AppData.sekistatus[num] = false
+                                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                                }
+                            } else {
+                                if AppData.sekistatus[num] {
+                                    btn.setImage(UIImage(named: "desk.png"), forState: .Normal)
+                                } else {
+                                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        /*for v in self.view.subviews {
             if v is UIButton {
                 let btn = v as! UIButton
                 for i in 0 ..< 50 {
                     let t : String = btn.currentTitle!
                     let b : Bool = t.containsString(String(i))
                     if b {
+                        NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
                             btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
@@ -51,7 +87,8 @@ class SekiHaitiViewController: UIViewController {
             }else{
                 NSLog("ボタンではありません。")
             }
-        }
+        }*/
+        nextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)
         checkbtnandupdlbl()
         // Do any additional setup after loading the view.
     }
