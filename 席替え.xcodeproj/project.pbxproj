@@ -137,10 +137,10 @@
 			children = (
 				238819131C7B046400FAD2E7 /* waku.png */,
 				23969C401C5DE95C001340C2 /* man.png */,
+				23969C3E1C5DE932001340C2 /* woman.png */,
 				23969C3C1C5DE31E001340C2 /* nodesk.png */,
 				23760D6E1C5DCD3C005438D6 /* desk.png */,
 				23760D651C5DB761005438D6 /* grid.png */,
-				23969C3E1C5DE932001340C2 /* woman.png */,
 				2306A7C11C828B2A00CB26DF /* 138876430504438697227_BG17a_1280.jpg */,
 				2306A7C31C828C4700CB26DF /* whiteback.png */,
 				23248FE21C82C8CA005543C2 /* bokutachi.otf */,
@@ -535,8 +535,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "席替え/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Tomatsu-Junki.---";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.junki-t.SekigaeApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -547,8 +548,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "席替え/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Tomatsu-Junki.---";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.junki-t.SekigaeApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

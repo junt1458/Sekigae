@@ -31,7 +31,7 @@ class M_WSetViewController: UIViewController {
                         NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
-                            btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
+                            btn.addTarget(self, action: #selector(M_WSetViewController.buttontap(_:)), forControlEvents: .TouchUpInside)
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
@@ -79,13 +79,13 @@ class M_WSetViewController: UIViewController {
         if man {
             for i in 0 ..< AppData.sekistatus.count {
                 if AppData.m_wstatus[i] && AppData.sekistatus[i] {
-                    c++
+                    c += 1
                 }
             }
         } else {
             for i in 0 ..< AppData.sekistatus.count {
                 if !AppData.m_wstatus[i] {
-                    c++
+                    c += 1
                 }
             }
         }
@@ -117,7 +117,7 @@ class M_WSetViewController: UIViewController {
                         btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
                     }
                 }else{
-                    a++
+                    a += 1
                     btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
                     btn.enabled = false
                 }
@@ -154,9 +154,9 @@ class M_WSetViewController: UIViewController {
         for i in 0 ..< AppData.sekistatus.count {
             if AppData.sekistatus[i] {
                 if AppData.m_wstatus[i] {
-                    m++
+                    m += 1
                 }else{
-                    w++
+                    w += 1
                 }
             }
         }

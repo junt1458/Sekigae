@@ -23,6 +23,7 @@ class NinzuuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)
         // Do any additional setup after loading the view.
     }
     
@@ -39,9 +40,9 @@ class NinzuuViewController: UIViewController {
         super.viewWillAppear(animated)
         if(!isObserving) {
             let notification = NSNotificationCenter.defaultCenter()
-            notification.addObserver(self, selector: "keyboardWillShow:"
+            notification.addObserver(self, selector: #selector(NinzuuViewController.keyboardWillShow(_:))
                 , name: UIKeyboardWillShowNotification, object: nil)
-            notification.addObserver(self, selector: "keyboardWillHide:"
+            notification.addObserver(self, selector: #selector(NinzuuViewController.keyboardWillHide(_:))
                 , name: UIKeyboardWillHideNotification, object: nil)
             isObserving = true
         }

@@ -18,7 +18,7 @@ class SeatSetViewController: UIViewController {
     func getIndex(lng: Int) -> Int {
         var ind: Int = lng - 5
         if lng >= 7 {
-            ind--
+            ind -= 1
         }
         if ind < 0 {
             ind = 5
@@ -49,7 +49,7 @@ class SeatSetViewController: UIViewController {
                         NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
-                            btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
+                            btn.addTarget(self, action: #selector(SeatSetViewController.buttontap(_:)), forControlEvents: .TouchUpInside)
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
@@ -104,7 +104,7 @@ class SeatSetViewController: UIViewController {
                     btn.setBackgroundImage(UIImage(named: "woman.png"), forState: .Normal)
                 }
             }else{
-                a++
+                a += 1
                 btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
                 btn.enabled = false
             }

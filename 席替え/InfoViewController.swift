@@ -32,7 +32,7 @@ class InfoViewController: UIViewController {
     func addRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
-        refreshControl.addTarget(self, action: "pullToRefresh", forControlEvents:.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(InfoViewController.pullToRefresh), forControlEvents:.ValueChanged)
         webview.scrollView.addSubview(refreshControl)
     }
     

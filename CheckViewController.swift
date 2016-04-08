@@ -12,6 +12,7 @@ class CheckViewController: UIViewController {
 
     var btnlocations: [CGPoint]!
     var btnsize: [CGFloat]!
+    var setcolor: Bool = true
     
     func CheckandCreateData(){
         var flag = false
@@ -43,6 +44,10 @@ class CheckViewController: UIViewController {
                 }
             }
         }
+    }
+
+    @IBAction func switched(sender: UISwitch){
+        setcolor = sender.on
     }
     
     @IBAction func back(){
@@ -93,6 +98,7 @@ class CheckViewController: UIViewController {
             vc.vc = self
             vc.btnlocations = self.btnlocations
             vc.btnsize = self.btnsize
+            vc.setcolor = self.setcolor
         }
     }
 }

@@ -16,6 +16,7 @@ class ResultViewController: UIViewController {
     @IBOutlet var ib2: UIImageView!
     @IBOutlet var ib3: UIImageView!
     
+    var setcolor: Bool!
     var btnlocations: [CGPoint]!
     var btnsize: [CGFloat]!
     var labels = [UILabel]()
@@ -33,7 +34,7 @@ class ResultViewController: UIViewController {
     func getIndex(lng: Int) -> Int {
         var ind: Int = lng - 5
         if lng >= 7 {
-            ind--
+            ind -= 1
         }
         if ind < 0 {
             ind = 5
@@ -63,6 +64,13 @@ class ResultViewController: UIViewController {
             let img :UIImageView = UIImageView(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
             img.center = i
             img.image = UIImage(named: "desk.png")
+            if setcolor! && AppData.sekistatus[a] {
+                if AppData.m_wstatus[a] {
+                    img.image = UIImage(named: "man.png")
+                } else {
+                    img.image = UIImage(named: "woman.png")
+                }
+            }
             let label : UILabel = UILabel(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
             label.center = CGPoint(x: btnsize[1] / 2, y: btnsize[0] / 2)
             label.text = "Label"
@@ -236,6 +244,8 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func onemore(sender: AnyObject){
+        AppData.People_Data = backsdata
+        AppData.Seat_Data = backdata
         self.dismissViewControllerAnimated(true, completion: nil)
         vc.next(sender)
     }
@@ -323,11 +333,12 @@ class ResultViewController: UIViewController {
         for i in 0 ..< labels.count {
             if AppData.sekistatus[i] {
                 if AppData.Seat_Data[i] == -1 {
+                    NSLog("%d's Seat isn't set.")
                     if AppData.m_wstatus[i] {
                         var index:Int = Int(arc4random_uniform(UInt32(manData.count)))
                         var dcount = 0
                         while dcount < 10 && AppData.Before_Data[i] == manData[index].AllNumber {
-                            dcount++
+                            dcount += 1
                             index = Int(arc4random_uniform(UInt32(manData.count)))
                         }
                         let data = manData[index]
@@ -340,7 +351,7 @@ class ResultViewController: UIViewController {
                         var index:Int = Int(arc4random_uniform(UInt32(womanData.count)))
                         var dcount = 0
                         while dcount < 10 && AppData.Before_Data[i] == womanData[index].AllNumber {
-                            dcount++
+                            dcount += 1
                             index = Int(arc4random_uniform(UInt32(womanData.count)))
                         }
                         let data = womanData[index]
@@ -352,6 +363,7 @@ class ResultViewController: UIViewController {
                     }
                 }
             } else {
+                NSLog("%d's Seat is already set.")
                 imageviews[i].removeFromSuperview()
                 let img :UIImageView = UIImageView(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
                 img.center = btnlocations[i]

@@ -24,7 +24,7 @@ class SekiHaitiViewController: UIViewController {
                         NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
                             NSLog("ボタンです。名前: " + t)
-                            btn.addTarget(self, action: "buttontap:", forControlEvents: .TouchUpInside)
+                            btn.addTarget(self, action: #selector(SekiHaitiViewController.buttontap(_:)), forControlEvents: .TouchUpInside)
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
@@ -127,7 +127,7 @@ class SekiHaitiViewController: UIViewController {
         var truecnt: Int = 0
         for b in AppData.sekistatus {
             if b {
-                truecnt++
+                truecnt += 1
             }
         }
         if truecnt == AppData.maxcount {
