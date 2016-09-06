@@ -3,6 +3,7 @@
 //  席替え
 //  Description:
 //    詳細設定の画面を制御するクラスです。
+//
 //  Created by Tomatsu Junki on 2016/02/10.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //
