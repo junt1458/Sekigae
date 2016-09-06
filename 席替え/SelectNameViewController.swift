@@ -10,9 +10,9 @@ import UIKit
 
 class SelectNameViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    var manmode: Bool!
-    var vc: SeatSetViewController!
-    var seatnum: Int!
+    var manmode: Bool!   //男の設定か
+    var vc: SeatSetViewController!   //前のViewControllerの
+    var seatnum: Int!  //席番号
     @IBOutlet var table: UITableView!
     
     override func viewDidLoad() {
@@ -31,6 +31,10 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    //
+    // 男女別の人数を取得する関数
+    //
     func getCount(man: Bool) -> Int{
         var count = 0
         if man {
@@ -38,10 +42,11 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
         } else {
             count = AppData.womancount
         }
-        NSLog("count:%d", count)
         return count
     }
-    
+    //
+    // 固定を解除するボタン
+    //
     @IBAction func deset(){
         if AppData.Seat_Data[seatnum] != -1 {
             AppData.People_Data[AppData.Seat_Data[seatnum]].SeatNumber = -1
@@ -53,7 +58,6 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if manmode! {
-            NSLog("indexPath.row:%d", indexPath.row)
             if AppData.People_Data[indexPath.row].SeatNumber != -1 {
                 AppData.Seat_Data[AppData.People_Data[indexPath.row].SeatNumber] = -1
                 AppData.People_Data[indexPath.row].SeatNumber = -1
@@ -92,7 +96,6 @@ class SelectNameViewController: UIViewController,UITableViewDataSource,UITableVi
         if manmode! {
             cell.textLabel?.text = String(format: "No.%d," + AppData.People_Data[indexPath.row].Name, AppData.People_Data[indexPath.row].Number)
         } else {
-            NSLog("indexPath.row + getCount(true) - 2 = %d", indexPath.row + getCount(true))
             cell.textLabel?.text = String(format: "No.%d," + AppData.People_Data[indexPath.row + getCount(true)].Name, AppData.People_Data[indexPath.row + getCount(true)].Number)
         }
         return cell

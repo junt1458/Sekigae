@@ -10,11 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var lbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if DebugSet.autoLoad {
-            AppData.loadData()
-        }
+        let version: AnyObject! = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+        let ver = String(version)
+        lbl.text = String(format: "Ver %@", ver)
         AppData.loadBefore()
         // Do any additional setup after loading the view, typically from a nib.
     }

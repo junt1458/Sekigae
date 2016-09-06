@@ -1,7 +1,8 @@
 //
 //  NinzuuViewController.swift
 //  席替え
-//
+//  Description:
+//    人数を設定する
 //  Created by Tomatsu Junki on 2016/01/30.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //
@@ -23,8 +24,7 @@ class NinzuuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)
-        // Do any additional setup after loading the view.
+        NextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)  //次へボタンの色の設定
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,10 +52,8 @@ class NinzuuViewController: UIViewController {
         if(isObserving) {
             let notification = NSNotificationCenter.defaultCenter()
             notification.removeObserver(self)
-            notification.removeObserver(self
-                , name: UIKeyboardWillShowNotification, object: nil)
-            notification.removeObserver(self
-                , name: UIKeyboardWillHideNotification, object: nil)
+            notification.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+            notification.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
             isObserving = false
         }
     }
@@ -76,6 +74,9 @@ class NinzuuViewController: UIViewController {
         DoneBtn.hidden = true
     }
     
+    //
+    // 次へ
+    //
     @IBAction func next(sender: AnyObject){
         var msg = ""
         var invalid = false
@@ -106,6 +107,9 @@ class NinzuuViewController: UIViewController {
         }
     }
     
+    //
+    // 前回のデータを読み込む
+    //
     @IBAction func LoadBeforeData(sender: AnyObject){
         AppData.loadData()
         if (AppData.mancount + AppData.womancount) > AppData.CountLimit || (AppData.mancount + AppData.womancount) <= 0 {

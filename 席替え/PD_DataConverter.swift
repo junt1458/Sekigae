@@ -1,15 +1,22 @@
 //
 //  PD_DataConverter.swift
 //  席替え
-//
+//  Description: 
+//    独自クラスであるPeople_InformationをNSUserDefaultsに保存するために、String型の配列に変換したり、String型の配列からデータを戻すクラスです。
 //  Created by Tomatsu Junki on 2016/02/18.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //
 
 import Foundation
 
+
 class PD_DataConverter {
     
+    //
+    // Stringの文字列"true","false","1","0"などからBoolに変換します。
+    // 返り値
+    //  Bool
+    //
     func convertToBool(value : String) -> Bool{
         switch value {
         case "True", "true", "yes", "1":

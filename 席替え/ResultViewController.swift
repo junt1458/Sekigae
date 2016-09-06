@@ -10,27 +10,29 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    @IBOutlet var imgview: UIImageView!
+    @IBOutlet var imgview: UIImageView!  //背景のImageView
     
-    @IBOutlet var ib1: UIImageView!
-    @IBOutlet var ib2: UIImageView!
-    @IBOutlet var ib3: UIImageView!
+    @IBOutlet var ib1: UIImageView!      //席のImageView+Labelの背景のImageView1
+    @IBOutlet var ib2: UIImageView!      //席のImageView+Labelの背景のImageView2
+    @IBOutlet var ib3: UIImageView!      //席のImageView+Labelの背景のImageView3
     
-    var setcolor: Bool!
-    var btnlocations: [CGPoint]!
-    var btnsize: [CGFloat]!
-    var labels = [UILabel]()
-    var imageviews = [UIImageView]()
-    var vc: CheckViewController!
-    var backdata = [Int]()
-    var backsdata = [People_Information]()
-    //var hidariue: CGPoint!
-    //var migishita: CGPoint!
-    var ar: CGRect!
+    var setcolor: Bool!                        //色を変えるかどうか
+    var btnlocations: [CGPoint]!               //ボタンの場所の配列
+    var btnsize: [CGFloat]!                    //ボタンのサイズの配列
+    var labels = [UILabel]()                   //ImageViewの上にあるLabelの配列
+    var imageviews = [UIImageView]()           //ImageViewの配列
+    var vc: CheckViewController!               //もう一度ボタン用の前のViewContoller
+    var backdata = [Int]()                     //戻るときの固定データ
+    var backsdata = [People_Information]()     //戻るときの人のデータ
+    var backbdata = [Int]()                    //戻るときの前回のデータ
+    var ar: CGRect!                            //座標記録用
     
-    var img1: UIImage!
-    var img2: UIImage!
+    var img1: UIImage!        //保存用の画像1
+    var img2: UIImage!        //保存用の画像2
     
+    //
+    // 文字の大きさの配列の位置を取得する関数
+    //
     func getIndex(lng: Int) -> Int {
         var ind: Int = lng - 5
         if lng >= 7 {
@@ -45,6 +47,9 @@ class ResultViewController: UIViewController {
         return ind
     }
     
+    //
+    // 文字の大きさの配列を取得する関数
+    //
     func getSizeArray() -> [Float] {
         if AppData.usesize1 {
             return AppData.size1
@@ -55,12 +60,18 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        // 戻るとき用のデータの保存
+        //
         backdata = AppData.Seat_Data
         backsdata = AppData.People_Data
-        NSLog("count:%d",btnlocations.count)
+        backbdata = AppData.Before_Data
+        
+        //
+        // ImageViewとLabelの準備
+        //
         for a in 0 ..< btnlocations.count {
             let i = btnlocations[a]
-            NSLog("a:%d", a)
             let img :UIImageView = UIImageView(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
             img.center = i
             img.image = UIImage(named: "desk.png")
@@ -81,21 +92,45 @@ class ResultViewController: UIViewController {
             labels.append(label)
             imageviews.append(img)
         }
+        
+        //
+        // 前回のデータの数がおかしい場合は前回のデータを読み込み直す
+        //
         if AppData.Before_Data.count != AppData.CountLimit {
             AppData.loadBefore()
         }
-        tyuusen()
-        ib1.frame = getBackSize1()
-        ib2.frame = getBackSize2()
-        ib3.frame = getBackSize3()
-        delviews()
-        let img = imgview.image!
-        imgview.image = nil
-        getArea()
-        imgview.image = img
+        
+        tyuusen()                   //抽選
+        rotateLabels()              //回転がONの場合Labelを回転させる
+        ib1.frame = getBackSize1()  //ImageView+Labelの背景の場所を設定1
+        ib2.frame = getBackSize2()  //ImageView+Labelの背景の場所を設定2
+        ib3.frame = getBackSize3()  //ImageView+Labelの背景の場所を設定3
+        delviews()                  //横１列使われてない場所はViewを削除する
+        let img = imgview.image!    //背景の画像を一時的に保存する
+        imgview.image = nil         //撮影用に背景を削除する
+        TakePhoto()                 //席の写真を撮影する
+        imgview.image = img         //背景の画像を戻す
         // Do any additional setup after loading the view.
     }
     
+    //
+    // 設定によってLabelを回転させる関数
+    //
+    func rotateLabels(){
+        var kakudo: CGFloat!
+        if AppData.rotateLabel {
+            kakudo = CGFloat((180/180.0) * M_PI)
+        } else {
+            kakudo = 0.0
+        }
+        for l in labels {
+            l.transform = CGAffineTransformMakeRotation(kakudo)
+        }
+    }
+    
+    //
+    // １列使われてない場所を消す関数
+    //
     func delviews(){
         for i in 0 ..< 8 {
             if isnotUsed(i) {
@@ -104,6 +139,9 @@ class ResultViewController: UIViewController {
         }
     }
     
+    //
+    // ImageView+Labelの背景の場所を取得する関数 1
+    //
     func getBackSize1() -> CGRect {
         var minretsu = 99
         var maxretsu = 0
@@ -117,11 +155,19 @@ class ResultViewController: UIViewController {
                 }
             }
         }
-        let hidariue = CGPointMake(CGFloat(Int(imageviews[minretsu + 8 * 5].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)), CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))
-        let migishita = CGPointMake(CGFloat(Int(imageviews[maxretsu + 8 * 4].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)), CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))
+        let hidariue = CGPointMake(
+            CGFloat(Int(imageviews[minretsu + 8 * 5].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)),
+            CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))  //左上の座標
+        let migishita = CGPointMake(
+            CGFloat(Int(imageviews[maxretsu + 8 * 4].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)),
+            CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))  //右下の座標
+        
         return CGRectMake(hidariue.x, hidariue.y, migishita.x - hidariue.x, migishita.y - hidariue.y + 1)
     }
     
+    //
+    // ImageView+Labelの背景の場所を取得する関数 2
+    //
     func getBackSize2() -> CGRect {
         var minretsu = 99
         var maxretsu = 0
@@ -135,11 +181,19 @@ class ResultViewController: UIViewController {
                 }
             }
         }
-        let hidariue = CGPointMake(CGFloat(Int(imageviews[minretsu + 8 * 3].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)), CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))
-        let migishita = CGPointMake(CGFloat(Int(imageviews[maxretsu + 8 * 2].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)), CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))
+        let hidariue = CGPointMake(
+            CGFloat(Int(imageviews[minretsu + 8 * 3].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)),
+            CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))   //左上の座標
+        let migishita = CGPointMake(
+            CGFloat(Int(imageviews[maxretsu + 8 * 2].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)),
+            CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))   //右下の座標
+        
         return CGRectMake(hidariue.x, hidariue.y, migishita.x - hidariue.x, migishita.y - hidariue.y + 1)
     }
     
+    //
+    // ImageView+Labelの背景の場所を取得する関数 3
+    //
     func getBackSize3() -> CGRect {
         var minretsu = 99
         var maxretsu = 0
@@ -153,23 +207,30 @@ class ResultViewController: UIViewController {
                 }
             }
         }
-        let hidariue = CGPointMake(CGFloat(Int(imageviews[minretsu + 8 * 1].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)), CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))
-        let migishita = CGPointMake(CGFloat(Int(imageviews[maxretsu + 8 * 0].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)), CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))
+        let hidariue = CGPointMake(
+            CGFloat(Int(imageviews[minretsu + 8 * 1].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2)),
+            CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2)))   //左上の座標
+        let migishita = CGPointMake(
+            CGFloat(Int(imageviews[maxretsu + 8 * 0].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2)),
+            CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2)))   //右下の座標
+        
         return CGRectMake(hidariue.x, hidariue.y, migishita.x - hidariue.x, migishita.y - hidariue.y + 1)
     }
     
-    func getArea(){
+    //
+    // 保存用の写真を撮る関数
+    //
+    func TakePhoto(){
         for i in 0 ..< 8 {
             if !isnotUsed(i) {
-                let num = i
-                let a = (num / 8)
-                let n = num - a * 8
-                let im1 = imageviews[n + 8 * 0]
-                let im2 = imageviews[n + 8 * 1]
-                let kankaku = Int(im1.frame.midX - im2.frame.midX - im1.frame.width)
-                NSLog("間隔: %d", kankaku)
-                var minretsu = 99
-                var maxretsu = 0
+                let num = i                          //列の番号
+                let a = (num / 8)                    //したの掛け算用の定数
+                let n = num - a * 8                  //したの取得用の定数
+                let im1 = imageviews[n + 8 * 0]      //間隔取得用のImageView1
+                let im2 = imageviews[n + 8 * 1]      //間隔取得用のImageView2
+                let kankaku = Int(im1.frame.midX - im2.frame.midX - im1.frame.width)  //間隔(１つ目の真ん中の座標) - (2つ目の真ん中の座標) - (Viewの横幅)
+                var minretsu = 99  //最前列
+                var maxretsu = 0   //最後列
                 for a in 0 ..< 8 {
                     if !isnotUsed(a) {
                         if minretsu > a {
@@ -180,58 +241,47 @@ class ResultViewController: UIViewController {
                         }
                     }
                 }
-                let hidariue = CGPointMake(CGFloat(Int(imageviews[minretsu + 8 * 5].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2) - kankaku), CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2) - kankaku))
-                let migishita = CGPointMake(CGFloat(Int(imageviews[maxretsu + 8 * 0].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2) + kankaku), CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2) + kankaku))
                 
-                let ab        = CGPointMake(CGFloat(Int(imageviews[7        + 8 * 0].center.x) + Int(imageviews[7        + 8 * 0].frame.width / 2) + kankaku), CGFloat(Int(imageviews[7        + 8 * 0].center.y) + Int(imageviews[7        + 8 * 0].frame.height / 2) + kankaku))
-                NSLog("最後尾の列: %d, 最前列: %d", maxretsu, minretsu)
-                NSLog("左上 X: %d, Y:%d, 右下 X: %d, Y: %d", Int(hidariue.x), Int(hidariue.y), Int(migishita.x), Int(migishita.y))
-                ar = CGRectMake(hidariue.x, hidariue.y, migishita.x - hidariue.x, migishita.y - hidariue.y)
-                NSLog("minX: %d, minY:%d, maxX:%d, maxY:%d", Int(ar.minX), Int(ar.minY), Int(ar.maxX), Int(ar.maxY))
+                let hidariue = CGPointMake(
+                    CGFloat(Int(imageviews[minretsu + 8 * 5].center.x) - Int(imageviews[minretsu + 8 * 5].frame.width / 2) - kankaku),
+                    CGFloat(Int(imageviews[minretsu + 8 * 5].center.y) - Int(imageviews[minretsu + 8 * 5].frame.height / 2) - kankaku))   //左上の座標
+                let migishita = CGPointMake(
+                    CGFloat(Int(imageviews[maxretsu + 8 * 0].center.x) + Int(imageviews[maxretsu + 8 * 0].frame.width / 2) + kankaku),
+                    CGFloat(Int(imageviews[maxretsu + 8 * 0].center.y) + Int(imageviews[maxretsu + 8 * 0].frame.height / 2) + kankaku))   //右下の座標
+                let ab = CGPointMake(
+                    CGFloat(Int(imageviews[7 + 8 * 0].center.x) + Int(imageviews[7 + 8 * 0].frame.width / 2) + kankaku),
+                    CGFloat(Int(imageviews[7 + 8 * 0].center.y) + Int(imageviews[7 + 8 * 0].frame.height / 2) + kankaku))      //結果画面と同じの撮影用の座標
+
+                //ar = CGRectMake(hidariue.x, hidariue.y, migishita.x - hidariue.x, migishita.y - hidariue.y)      //中央に寄せるや引き伸ばすの撮影用の座標
+                
+                //
+                // 写真の撮影
+                //
                 UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, UIScreen.mainScreen().scale * 3)
                 self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-                let img = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
+                let img = UIGraphicsGetImageFromCurrentImageContext()! as UIImage               //画面全体のスクリーンショット
                 UIGraphicsEndImageContext()
-                let origRef    = img.CGImage;
-                let origWidth  = Int(CGImageGetWidth(origRef))
-                let origHeight = Int(CGImageGetHeight(origRef))
-                NSLog("Screen Height: %d, Screen Width: %d, Img Height: %d, Img Width: %d, ih/sh=%d, iw/sw=%d", Int(self.view.frame.height), Int(self.view.frame.width), origHeight, origWidth, origHeight / Int(self.view.frame.height), origWidth / Int(self.view.frame.width))
-                let hiritu1 = Int(origWidth / Int(self.view.frame.width))
-                let hiritu2 = Int(origHeight / Int(self.view.frame.height))
-                //ar = CGRectMake(CGFloat(Int(hidariue.x) * hiritu1), CGFloat(Int(hidariue.y) * hiritu2), CGFloat(Int(migishita.x) - Int(hidariue.x) * hiritu1), CGFloat(Int(migishita.y) - Int(hidariue.y) * hiritu2))
-                let a1 : CGFloat = CGFloat(Int(hidariue.x) * hiritu1)
-                let a2 : CGFloat = CGFloat(Int(hidariue.y) * hiritu2 + 1)
-                let a3 : CGFloat = CGFloat(Int(Int(migishita.x) * hiritu1) - Int(Int(hidariue.x) * hiritu1))
-                let a4 : CGFloat = CGFloat(Int(Int(migishita.y) * hiritu2) - Int(Int(hidariue.y) * hiritu2) + 1)
+                let origRef    = img.CGImage;                          //画像のCGImage
+                let origWidth  = Int(CGImageGetWidth(origRef))         //画像の横の幅
+                let origHeight = Int(CGImageGetHeight(origRef))        //画像の縦の幅
+                let hiritu1 = Int(origWidth / Int(self.view.frame.width))    //画像の横とViewの横の比率
+                let hiritu2 = Int(origHeight / Int(self.view.frame.height))  //画像の縦とViewの縦の比率
                 
-                let a11 : CGFloat = CGFloat(Int(hidariue.x) * hiritu1)
-                let a22 : CGFloat = CGFloat(Int(hidariue.y) * hiritu2 + 1)
-                let a33 : CGFloat = CGFloat(Int(Int(ab.x) * hiritu1) - Int(Int(hidariue.x) * hiritu1))
-                let a44 : CGFloat = CGFloat(Int(Int(ab.y) * hiritu2) - Int(Int(hidariue.y) * hiritu2) + 1)
-                let ar2 = CGRectMake(a11, a22, a33, a44)
+                let a1 : CGFloat = CGFloat(Int(hidariue.x) * hiritu1)       //画像の左のX座標
+                let a2 : CGFloat = CGFloat(Int(hidariue.y) * hiritu2 + 1)   //画像の左のY座標
+                let a3 : CGFloat = CGFloat(Int(Int(migishita.x) * hiritu1) - Int(Int(hidariue.x) * hiritu1))       //画像の右のX座標(引き伸ばす、中央に寄せる用)
+                let a4 : CGFloat = CGFloat(Int(Int(migishita.y) * hiritu2) - Int(Int(hidariue.y) * hiritu2) + 1)   //画像の右のY座標(引き伸ばす、中央に寄せる用)
                 
-                ar = CGRectMake(a1, a2, a3, a4)
-                var imageRef = CGImageCreateWithImageInRect(img.CGImage, ar)
-                let cropImage = UIImage(CGImage: imageRef!)
-                NSLog("minX: %d, minY:%d, maxX:%d, maxY:%d", Int(ar.minX), Int(ar.minY), Int(ar.maxX), Int(ar.maxY))
-                NSLog("a1: %d, a2:%d, a3:%d, a4:%d", Int(a1), Int(a2), Int(a3), Int(a4))
-                //UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
-               //UIImageWriteToSavedPhotosAlbum(cropImage, nil, nil, nil)
-               //s UIGraphicsBeginImageContext(ar.size)
-               // self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-               // let img = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
-              //  UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
+                let a33 : CGFloat = CGFloat(Int(Int(ab.x) * hiritu1) - Int(Int(hidariue.x) * hiritu1))      //画像の右のX座標(結果画面と同じ用)
+                let a44 : CGFloat = CGFloat(Int(Int(ab.y) * hiritu2) - Int(Int(hidariue.y) * hiritu2) + 1)  //画像の右のY座標(結果画面と同じ用)
+                
+                let ar2 = CGRectMake(a1, a2, a33, a44)  //結果画面と同じの画像用の座標
+                ar = CGRectMake(a1, a2, a3, a4)         //中央に寄せるや引き伸ばすの画像用の座標
+                var imageRef = CGImageCreateWithImageInRect(img.CGImage, ar)  //中央、引き伸ばしのCGImage
+                let cropImage = UIImage(CGImage: imageRef!)                   //中央、引き伸ばしのUIImage
                 img1 = cropImage
-                
-                UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, UIScreen.mainScreen().scale * 3)
-                self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-                //let imm2 = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
-                UIGraphicsEndImageContext()
-                imageRef = CGImageCreateWithImageInRect(img.CGImage, ar2)
-                NSLog("test")
-                NSLog("minX: %d, minY:%d, maxX:%d, maxY:%d", Int(ar2.minX), Int(ar2.minY), Int(ar2.maxX), Int(ar2.maxY))
-                NSLog("a1: %d, a2:%d, a3:%d, a4:%d", Int(a11), Int(a22), Int(a33), Int(a44))
-                let cropImage2 = UIImage(CGImage: imageRef!)
+                imageRef = CGImageCreateWithImageInRect(img.CGImage, ar2)  //結果と同じのCGImage
+                let cropImage2 = UIImage(CGImage: imageRef!)               //結果と同じのUIImage
                 img2 = cropImage2
                 break;
             }
@@ -243,19 +293,30 @@ class ResultViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //
+    // もう一度ボタン
+    //
     @IBAction func onemore(sender: AnyObject){
         AppData.People_Data = backsdata
         AppData.Seat_Data = backdata
+        AppData.Before_Data = backbdata
         self.dismissViewControllerAnimated(true, completion: nil)
         vc.next(sender)
     }
     
+    //
+    // 戻るボタン
+    //
     @IBAction func back(){
         AppData.People_Data = backsdata
         AppData.Seat_Data = backdata
+        AppData.Before_Data = backbdata
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //
+    // 人のデータの配列の位置を取得する関数です。
+    //
     func getArrayIndex(isMan: Bool, manData: [People_Information], womanData: [People_Information], data: People_Information) -> Int{
         if isMan {
             var index = -1
@@ -278,6 +339,9 @@ class ResultViewController: UIViewController {
         }
     }
     
+    //
+    // 1列削除します。
+    //
     func deleteViews(retsu: Int) {
         let num = retsu
         let a = (num / 8)
@@ -298,23 +362,22 @@ class ResultViewController: UIViewController {
         for i in 0 ..< 6 {
             if AppData.sekistatus[n + 8 * i] {
                 notused = false
-                NSLog("%d列は使われています。", retsu)
                 break;
             }
         }
         return notused
     }
     
+    //
+    // 抽選する関数です。
+    //
     func tyuusen(){
         var manData = getData(true)
-        for i in 0 ..< manData.count {
-            NSLog("manData[%d].Name: %@", i, manData[i].Name)
-        }
         var womanData = getData(false)
-        for i in 0 ..< womanData.count {
-            NSLog("womanData[%d].Name: %@", i, womanData[i].Name)
-        }
-
+        
+        //
+        // 固定されている人をリストから削除し、席に配置します
+        //
         for i in 0 ..< AppData.Seat_Data.count {
             if AppData.Seat_Data[i] != -1 {
                 let data = AppData.People_Data[AppData.Seat_Data[i]]
@@ -322,22 +385,26 @@ class ResultViewController: UIViewController {
                 let lng:Int = Int(String(labels[i].text!.endIndex))!
                 labels[i].font = UIFont.systemFontOfSize(CGFloat(getSizeArray()[getIndex(lng)]))
                 if AppData.m_wstatus[i] {
-                    NSLog("manData.count: %d, getArrayIndex: %d", manData.count, getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                     manData.removeAtIndex(getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                 }else{
-                    NSLog("womanData.count: %d, getArrayIndex: %d", womanData.count, getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                     womanData.removeAtIndex(getArrayIndex(AppData.m_wstatus[i], manData: manData, womanData: womanData, data: data))
                 }
             }
         }
+        
+        //
+        // 固定されていない席を抽選します。
+        //
         for i in 0 ..< labels.count {
             if AppData.sekistatus[i] {
                 if AppData.Seat_Data[i] == -1 {
-                    NSLog("%d's Seat isn't set.")
                     if AppData.m_wstatus[i] {
                         var index:Int = Int(arc4random_uniform(UInt32(manData.count)))
                         var dcount = 0
                         while dcount < 10 && AppData.Before_Data[i] == manData[index].AllNumber {
+                            //
+                            // 前回の席と同じだったら１０回まで抽選しなおします。
+                            //
                             dcount += 1
                             index = Int(arc4random_uniform(UInt32(manData.count)))
                         }
@@ -351,6 +418,9 @@ class ResultViewController: UIViewController {
                         var index:Int = Int(arc4random_uniform(UInt32(womanData.count)))
                         var dcount = 0
                         while dcount < 10 && AppData.Before_Data[i] == womanData[index].AllNumber {
+                            //
+                            // 前回の席と同じだったら１０回まで抽選しなおします。
+                            //
                             dcount += 1
                             index = Int(arc4random_uniform(UInt32(womanData.count)))
                         }
@@ -363,7 +433,6 @@ class ResultViewController: UIViewController {
                     }
                 }
             } else {
-                NSLog("%d's Seat is already set.")
                 imageviews[i].removeFromSuperview()
                 let img :UIImageView = UIImageView(frame: CGRectMake(1, 1, btnsize[1], btnsize[0]))
                 img.center = btnlocations[i]
@@ -374,6 +443,9 @@ class ResultViewController: UIViewController {
         }
     }
     
+    //
+    // 男女別のデータを取得する関数
+    //
     func getData(manData: Bool) -> [People_Information] {
         var array = [People_Information]()
         for a in 0 ..< AppData.People_Data.count {
@@ -390,7 +462,10 @@ class ResultViewController: UIViewController {
         }
         return array
     }
-    
+
+    //
+    // 閉じるボタン
+    //
     @IBAction func close(sender: AnyObject){
         let alert = UIAlertController(title: "終了", message: "終了しますか？", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "はい", style: UIAlertActionStyle.Default, handler: {action in
@@ -417,8 +492,6 @@ class ResultViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "いいえ", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
-        
-        //FirstSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -427,12 +500,5 @@ class ResultViewController: UIViewController {
             v.img2 = img2
         }
     }
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
-    */
     
 }

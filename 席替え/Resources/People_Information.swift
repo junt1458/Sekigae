@@ -1,39 +1,21 @@
 //
 //  People_Information.swift
 //  席替え
-//
+//  Description:
+//    人物の固有データを一括管理するクラスです。
 //  Created by Tomatsu Junki on 2016/01/31.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //
 
 import Foundation
 
-//@objc(People_Information)
-class People_Information /*: NSObject,NSCoding*/ {
+class People_Information {
     
-    var isMan : Bool!
-    var SeatNumber: Int!
-    var Name: String!
-    var Number: Int!
-    var AllNumber: Int!
-    
-    /*@objc func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeBool(isMan, forKey: "isMan")
-        aCoder.encodeInteger(-1, forKey: "SeatNumber")
-        aCoder.encodeObject(Name, forKey: "Name")
-        aCoder.encodeInteger(Number, forKey: "Number")
-        aCoder.encodeInteger(AllNumber, forKey: "AllNumber")
-    }
-    
-    @objc required init?(coder aDecoder: NSCoder) {
-        self.isMan = aDecoder.decodeBoolForKey("isMan")
-        self.SeatNumber = aDecoder.decodeIntegerForKey("SeatNumber")
-        self.Name = aDecoder.decodeObjectForKey("Name") as! String
-        self.Number = aDecoder.decodeIntegerForKey("Number")
-        self.AllNumber = aDecoder.decodeIntegerForKey("AllNumber")
-    }
-    */
-    
+    var isMan : Bool!     //男か
+    var SeatNumber: Int!  //席番号
+    var Name: String!     //名前
+    var Number: Int!      //番号
+    var AllNumber: Int!   //通し番号
     
     init(isMan: Bool, SeatNumber: Int, Name: String, Number: Int, AllNumber: Int) {
         self.isMan = isMan

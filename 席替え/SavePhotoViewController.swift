@@ -10,8 +10,8 @@ import UIKit
 
 class SavePhotoViewController: UIViewController {
 
-    var img : UIImage!
-    var img2: UIImage!
+    var img : UIImage!      //引き伸ばし、中央に寄せる用の画像
+    var img2: UIImage!      //結果と同じ用の画像
     
     @IBOutlet var imgview: UIImageView!
     
@@ -49,6 +49,9 @@ class SavePhotoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //
+    // 写真を撮る関数
+    //
     func takephoto(){
         UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, UIScreen.mainScreen().scale * 3)
         self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)

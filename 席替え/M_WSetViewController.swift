@@ -1,7 +1,8 @@
 //
 //  M_WSetViewController.swift
 //  席替え
-//
+//  Description:
+//    男女席配置ウィンドウの制御クラスです。
 //  Created by Tomatsu Junki on 2016/01/30.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //
@@ -10,8 +11,8 @@ import UIKit
 
 class M_WSetViewController: UIViewController {
 
-    var btns = [UIButton]()
-    var btnsize = [CGFloat]()
+    var btns = [UIButton]()      //ボタンを収納する配列
+    var btnsize: [CGFloat] = [0, 0]    //ボタンサイズ
     
     @IBOutlet var label1: UILabel!
     @IBOutlet var label2: UILabel!
@@ -19,23 +20,23 @@ class M_WSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)
-        btnsize.append(0)
-        btnsize.append(0)
+        nextBtn.setTitleColor(UIColor(red: 0.66, green: 0.66, blue: 0.66, alpha: 1.0), forState: .Disabled)  //次へボタンの色の設定
+        
+        //
+        // ボタンの設定
+        //
+        btns = [UIButton]()
         for i in 0 ..< AppData.CountLimit {
             for v in self.view.subviews {
                 if let btn = v as? UIButton {
-                    let t : String = btn.currentTitle!
-                    let b : Bool = (t == String(format: "Button%d", (i + 1)))
-                    if b {
-                        NSLog("ボタン発見。名前: " + t)
+                    if (btn.currentTitle! == String(format: "Button%d", (i + 1))) {
                         if btn.allTargets().count == 0 {
-                            NSLog("ボタンです。名前: " + t)
                             btn.addTarget(self, action: #selector(M_WSetViewController.buttontap(_:)), forControlEvents: .TouchUpInside)
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
                             btn.tag = num + 100
+                            btns.append(btn)
                             btnsize[0] = btn.frame.height
                             btnsize[1] = btn.frame.width
                         }
@@ -44,13 +45,20 @@ class M_WSetViewController: UIViewController {
                 }
             }
         }
-        getBtns()
         setupbuttons()
+        
+        //
+        // 男女配置設定の初期化
+        //
         for i in 0 ..< AppData.CountLimit {
             if !AppData.sekistatus[i] {
                 AppData.m_wstatus[i] = true
             }
         }
+        
+        //
+        // ボタンの画像の設定
+        //
         for i in 0 ..< AppData.CountLimit {
             let btn = view.viewWithTag(i + 100) as! UIButton
             if AppData.sekistatus[i] {
@@ -71,9 +79,16 @@ class M_WSetViewController: UIViewController {
         }
         label1.text = "男: " + String(getNinzuu(true)) + "/" + String(AppData.mancount)
         label2.text = "女: " + String(getNinzuu(false)) + "/" + String(AppData.womancount)
-        // Do any additional setup after loading the view.
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //
+    // 男女別の人数を取得する
+    //
     func getNinzuu(man: Bool) -> Int {
         var c = 0
         if man {
@@ -92,78 +107,75 @@ class M_WSetViewController: UIViewController {
         return c
     }
     
-    func getBtns(){
-        btns = [UIButton]()
-        for i in 0 ..< AppData.sekistatus.count {
-            btns.append(self.view.viewWithTag(i + 100) as! UIButton)
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func setupbuttons(){
-        var a : Int = 0
-        if AppData.m_wstatus.count != AppData.CountLimit {
-            for i in 0 ..< AppData.sekistatus.count {
-                AppData.m_wstatus.append(true)
-                let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
-                if AppData.sekistatus[i] {
-                    btn.setImage(UIImage(named: "man.png"), forState: .Normal)
-                    if (i - a) >= AppData.mancount {
-                        AppData.m_wstatus[i] = false
-                        btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
-                    }
-                }else{
-                    a += 1
-                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
-                    btn.enabled = false
+    //
+    // 男女別の人数を取得する(ボタン設定前用)
+    //
+    func getNinzuu2(man: Bool) -> Int {
+        var c = 0
+        if man {
+            for i in 0 ..< AppData.m_wstatus.count {
+                if AppData.m_wstatus[i] && AppData.sekistatus[i] {
+                    c += 1
                 }
             }
         } else {
             for i in 0 ..< AppData.sekistatus.count {
-                NSLog("m_wstatus[%d]:%@", i, AppData.m_wstatus[i])
-                let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
-                if AppData.sekistatus[i] {
-                    if AppData.m_wstatus[i] {
-                        btn.setImage(UIImage(named: "man.png"), forState: .Normal)
-                    } else {
-                        btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
-                    }
-                } else {
-                    btn.setImage(UIImage(named: "nodesk.png"), forState: .Normal)
-                    btn.enabled = false
+                if !AppData.m_wstatus[i] {
+                    c += 1
                 }
             }
         }
-        NSLog("AppData.m_wstatus.count:%d", AppData.m_wstatus.count)
-        label1.text = "男: " + String(AppData.mancount) + "/" + String(AppData.mancount)
-        label2.text = "女: " + String(AppData.womancount) + "/" + String(AppData.womancount)
+        return c
+    }
+    
+    //
+    // ボタンの画像を設定する関数
+    //
+    func setupbuttons(){
+        if AppData.m_wstatus.count != AppData.CountLimit {
+            if AppData.CountLimit > AppData.m_wstatus.count {
+                for _ in AppData.m_wstatus.count ..< AppData.CountLimit {
+                    AppData.m_wstatus.append(true)
+                    if(getNinzuu2(true) > AppData.mancount){
+                        let i:Int = AppData.m_wstatus.count - 1
+                        if AppData.sekistatus[i]{
+                            AppData.m_wstatus[i] = false
+                        }
+                    }
+                }
+            } else {
+                var list = [Bool]()
+                for i in 0 ..< AppData.m_wstatus.count {
+                    list.append(AppData.m_wstatus[i])
+                }
+                if list.count != AppData.m_wstatus.count {
+                    for _ in list.count ..< AppData.CountLimit {
+                        list.append(true)
+                    }
+                }
+                AppData.m_wstatus = list
+            }
+        }
         nextBtn.enabled = true
     }
     
+    
+    //
+    // 戻るボタン
+    //
     @IBAction func back(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    //
+    // ラベルを更新
+    //
     func updatelabels(){
-        var m : Int = 0
-        var w : Int = 0
-        for i in 0 ..< AppData.sekistatus.count {
-            if AppData.sekistatus[i] {
-                if AppData.m_wstatus[i] {
-                    m += 1
-                }else{
-                    w += 1
-                }
-            }
-        }
-        NSLog("男子%d人,女子%d人", m, w)
+        let m : Int = getNinzuu(true)
+        let w : Int = getNinzuu(false)
         label1.text = "男: " + String(m) + "/" + String(AppData.mancount)
         label2.text = "女: " + String(w) + "/" + String(AppData.womancount)
-        NSLog("更新")
         if m == AppData.mancount && w == AppData.womancount {
             nextBtn.enabled = true
         }else{
@@ -171,15 +183,14 @@ class M_WSetViewController: UIViewController {
         }
     }
     
+    //
+    // 設定の変更
+    //
     @IBAction func buttontap(sender: AnyObject){
         let btn = (sender as! UIButton)
-        NSLog("成功: ボタンの取得")
         var numstr = btn.currentTitle!
-        NSLog("成功: ボタンの名前")
         numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
-        NSLog("成功: ボタン番号String取得")
         let num = Int(numstr)! - 1
-        NSLog("成功: ボタン番号取得")
         if AppData.m_wstatus[num] {
            AppData.m_wstatus[num] = false
             btn.setImage(UIImage(named: "woman.png"), forState: .Normal)
@@ -188,10 +199,11 @@ class M_WSetViewController: UIViewController {
             btn.setImage(UIImage(named: "man.png"), forState: .Normal)
         }
         updatelabels()
-        NSLog("成功: ラベルのアップデート")
-        NSLog("%d番のボタンがタップされました。", num+1)
     }
     
+    //
+    // ボタンの場所の取得
+    //
     func getBtnLocations() -> [CGPoint] {
         var ret = [CGPoint]()
         for a in btns {
@@ -200,6 +212,10 @@ class M_WSetViewController: UIViewController {
         return ret
     }
     
+    
+    //
+    // 次のウィンドウへ変数を渡す
+    //
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let vc = segue.destinationViewController as! CheckViewController
         vc.btnlocations = self.getBtnLocations()

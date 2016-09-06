@@ -25,7 +25,6 @@
 		23C20A921C5C70E300ECE859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20A911C5C70E300ECE859 /* AppDelegate.swift */; };
 		23C20A941C5C70E300ECE859 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20A931C5C70E300ECE859 /* ViewController.swift */; };
 		23C20A991C5C70E300ECE859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23C20A981C5C70E300ECE859 /* Assets.xcassets */; };
-		23C20A9C1C5C70E400ECE859 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C20A9A1C5C70E400ECE859 /* LaunchScreen.storyboard */; };
 		23C20AA71C5C70E400ECE859 /* ___Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20AA61C5C70E400ECE859 /* ___Tests.swift */; };
 		23C20AB21C5C70E400ECE859 /* ___UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20AB11C5C70E400ECE859 /* ___UITests.swift */; };
 		23C20AFA1C5C865900ECE859 /* UsageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C20AF91C5C865900ECE859 /* UsageViewController.swift */; };
@@ -40,7 +39,6 @@
 		23E989EB1C6F19E4001F656E /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E989EA1C6F19E4001F656E /* ResultViewController.swift */; };
 		23F03A5E1C880DD900D6CADA /* iPhone4s.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F03A5D1C880DD900D6CADA /* iPhone4s.storyboard */; };
 		23FC50A41C6DD2ED00BF6250 /* SeatSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC50A31C6DD2ED00BF6250 /* SeatSetViewController.swift */; };
-		23FC50A71C6DE58000BF6250 /* DebugSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC50A61C6DE58000BF6250 /* DebugSet.swift */; };
 		23FC50A91C6EEE5E00BF6250 /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC50A81C6EEE5E00BF6250 /* SelectNameViewController.swift */; };
 		23FCA8AF1C5DEE7D00409F9D /* People_Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +80,6 @@
 		23C20A911C5C70E300ECE859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23C20A931C5C70E300ECE859 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23C20A981C5C70E300ECE859 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		23C20A9B1C5C70E400ECE859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23C20A9D1C5C70E400ECE859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C20AA21C5C70E400ECE859 /* 席替えTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "席替えTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23C20AA61C5C70E400ECE859 /* ___Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___Tests.swift"; sourceTree = "<group>"; };
@@ -102,7 +99,6 @@
 		23E989EA1C6F19E4001F656E /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		23F03A5D1C880DD900D6CADA /* iPhone4s.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone4s.storyboard; sourceTree = "<group>"; };
 		23FC50A31C6DD2ED00BF6250 /* SeatSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatSetViewController.swift; sourceTree = "<group>"; };
-		23FC50A61C6DE58000BF6250 /* DebugSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugSet.swift; sourceTree = "<group>"; };
 		23FC50A81C6EEE5E00BF6250 /* SelectNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = People_Information.swift; path = Resources/People_Information.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,28 +181,26 @@
 			children = (
 				23760D671C5DCB15005438D6 /* Defaults */,
 				23760D641C5DB761005438D6 /* Resources */,
-				23C20A911C5C70E300ECE859 /* AppDelegate.swift */,
 				23955D7F1C7058080055A7B2 /* Main.storyboard */,
 				23F03A5D1C880DD900D6CADA /* iPhone4s.storyboard */,
-				23C20A9A1C5C70E400ECE859 /* LaunchScreen.storyboard */,
 				23C20A9D1C5C70E400ECE859 /* Info.plist */,
 				23C20A981C5C70E300ECE859 /* Assets.xcassets */,
-				23E2F6FC1C75D07100F855B9 /* PD_DataConverter.swift */,
 				23E2F6F81C7439F400F855B9 /* AppData.swift */,
-				23FC50A61C6DE58000BF6250 /* DebugSet.swift */,
-				23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */,
-				23C20AF91C5C865900ECE859 /* UsageViewController.swift */,
-				23C20AFB1C5C87F600ECE859 /* InfoViewController.swift */,
-				23C20A931C5C70E300ECE859 /* ViewController.swift */,
-				23C20AFD1C5C952300ECE859 /* NinzuuViewController.swift */,
-				23C20AFF1C5CA3F300ECE859 /* SekiHaitiViewController.swift */,
-				23C20B011C5CAC1900ECE859 /* M_WSetViewController.swift */,
+				23C20A911C5C70E300ECE859 /* AppDelegate.swift */,
 				23D2BE801C6B23C100ADCB90 /* CheckViewController.swift */,
+				23C20AFB1C5C87F600ECE859 /* InfoViewController.swift */,
+				23C20B011C5CAC1900ECE859 /* M_WSetViewController.swift */,
+				23C20AFD1C5C952300ECE859 /* NinzuuViewController.swift */,
+				23E2F6FC1C75D07100F855B9 /* PD_DataConverter.swift */,
+				23FCA8AE1C5DEE7D00409F9D /* People_Information.swift */,
+				23E989EA1C6F19E4001F656E /* ResultViewController.swift */,
+				23C20AFF1C5CA3F300ECE859 /* SekiHaitiViewController.swift */,
 				23D2BE7E1C69E0A500ADCB90 /* SetNameViewController.swift */,
 				23FC50A31C6DD2ED00BF6250 /* SeatSetViewController.swift */,
 				23FC50A81C6EEE5E00BF6250 /* SelectNameViewController.swift */,
-				23E989EA1C6F19E4001F656E /* ResultViewController.swift */,
 				239473291C818F3F00B664A4 /* SavePhotoViewController.swift */,
+				23C20AF91C5C865900ECE859 /* UsageViewController.swift */,
+				23C20A931C5C70E300ECE859 /* ViewController.swift */,
 			);
 			path = "席替え";
 			sourceTree = "<group>";
@@ -337,7 +331,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				238819141C7B046400FAD2E7 /* waku.png in Resources */,
-				23C20A9C1C5C70E400ECE859 /* LaunchScreen.storyboard in Resources */,
 				23969C411C5DE95C001340C2 /* man.png in Resources */,
 				23F03A5E1C880DD900D6CADA /* iPhone4s.storyboard in Resources */,
 				23760D6C1C5DCB15005438D6 /* Default-667h@2x.png in Resources */,
@@ -377,7 +370,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FC50A71C6DE58000BF6250 /* DebugSet.swift in Sources */,
 				23FC50A91C6EEE5E00BF6250 /* SelectNameViewController.swift in Sources */,
 				23C20AFE1C5C952300ECE859 /* NinzuuViewController.swift in Sources */,
 				23E2F6F91C7439F400F855B9 /* AppData.swift in Sources */,
@@ -435,14 +427,6 @@
 				23955D801C7058080055A7B2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		23C20A9A1C5C70E400ECE859 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				23C20A9B1C5C70E400ECE859 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

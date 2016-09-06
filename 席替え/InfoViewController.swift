@@ -1,7 +1,8 @@
 //
 //  InfoViewController.swift
 //  席替え
-//
+//  Description:
+//    お知らせを表示するウィンドウの制御クラスです。
 //  Created by Tomatsu Junki on 2016/01/30.
 //  Copyright © 2016年 Tomatsu Junki. All rights reserved.
 //

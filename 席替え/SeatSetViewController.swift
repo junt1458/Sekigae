@@ -10,11 +10,14 @@ import UIKit
 
 class SeatSetViewController: UIViewController {
 
-    var manmode: Bool!
-    var seatnum: Int!
+    var manmode: Bool!  //男の固定化
+    var seatnum: Int!   //席番号
 
     @IBOutlet var saveBtn: UIButton!
     
+    //
+    // 文字サイズの配列の位置を取得する関数
+    //
     func getIndex(lng: Int) -> Int {
         var ind: Int = lng - 5
         if lng >= 7 {
@@ -26,10 +29,12 @@ class SeatSetViewController: UIViewController {
         if lng > 9 {
             ind = 4
         }
-        NSLog("lng: %d, ind:%d, size: %f", lng, ind, Float(getSizeArray()[ind]))
         return ind
     }
     
+    //
+    // 文字サイズの配列を取得する関数
+    //
     func getSizeArray() -> [Float] {
         if AppData.usesize1 {
             return AppData.size1
@@ -40,20 +45,20 @@ class SeatSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        // ボタンの設定
+        //
         for i in 0 ..< AppData.CountLimit {
             for v in self.view.subviews {
                 if let btn = v as? UIButton {
                     let t : String = btn.currentTitle!
                     let b : Bool = (t == String(format: "Button%d", (i + 1)))
                     if b {
-                        NSLog("ボタン発見。名前: " + t)
                         if btn.allTargets().count == 0 {
-                            NSLog("ボタンです。名前: " + t)
                             btn.addTarget(self, action: #selector(SeatSetViewController.buttontap(_:)), forControlEvents: .TouchUpInside)
                             var numstr = btn.currentTitle!
                             numstr = numstr.stringByReplacingOccurrencesOfString("Button", withString: "")
                             let num = Int(numstr)! - 1
-                            NSLog("SeatData[%d]:%d", num, AppData.Seat_Data[num])
                             if AppData.Seat_Data[num] >= 0 {
                                 btn.setTitle(AppData.People_Data[AppData.Seat_Data[num]].Name, forState: .Normal)
                                 let lng:Int = Int(String(AppData.People_Data[AppData.Seat_Data[num]].Name.endIndex))!
@@ -61,7 +66,6 @@ class SeatSetViewController: UIViewController {
                             } else {
                                 btn.setTitle("", forState: .Normal)
                             }
-                            NSLog("num:%d",num)
                             btn.tag = num + 100;
                         }
                         break;
@@ -78,6 +82,9 @@ class SeatSetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //
+    // ボタンの文字をもう一度再表示する関数
+    //
     func redrawbtns(){
         for i in 0 ..< AppData.sekistatus.count{
             let btn = self.view.viewWithTag(i + 100) as! UIButton
@@ -91,11 +98,13 @@ class SeatSetViewController: UIViewController {
         }
     }
     
+    //
+    // ボタンの設定
+    //
     func setupbuttons(){
         var a : Int = 0
         for i in 0 ..< AppData.sekistatus.count {
             AppData.m_wstatus.append(true)
-            NSLog("i:%d",i)
             let btn : UIButton = self.view.viewWithTag(i + 100) as! UIButton
             if AppData.sekistatus[i] {
                 btn.setBackgroundImage(UIImage(named: "man.png"), forState: .Normal)
@@ -116,15 +125,15 @@ class SeatSetViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //
+    // 設定の切り替え
+    //
     @IBAction func buttontap(sender: AnyObject){
         let btn = (sender as! UIButton)
-        NSLog("成功: ボタンの取得")
         let num = btn.tag - 100
-        NSLog("設定の処理をここに書く")
         manmode = AppData.m_wstatus[num]
         seatnum = num
         performSegueWithIdentifier("SetSegue", sender: sender)
-        NSLog("%d番のボタンがタップされました。", num+1)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -27,6 +27,9 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Do any additional setup after loading the view.
     }
     
+    //
+    // 人のデータを作ります。
+    //
     func CheckandCreateData(){
         var flag = false
         if AppData.People_Data.count <= 0 {
@@ -40,16 +43,17 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
                 if i < AppData.mancount {
                     let pi = People_Information(isMan: true, SeatNumber: -1, Name: String(format: "%d番", i + 1), Number: i + 1, AllNumber: i)
                     AppData.People_Data.append(pi)
-                    NSLog("男,%d", i + 1)
                 }else{
                     let pi = People_Information(isMan: false, SeatNumber: -1, Name: String(format: "%d番", i + 1 - AppData.mancount), Number: i + 1 - AppData.mancount, AllNumber: i)
                     AppData.People_Data.append(pi)
-                    NSLog("女,%d", i - AppData.mancount + 1)
                 }
             }
         }
     }
 
+    //
+    // 改行キーを押したときの処理
+    //
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         save(true)
@@ -60,6 +64,9 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //
+    // TableViewのチェックの関数
+    //
     func checkbox(checked: Int){
         for row in 0 ..< AppData.People_Data.count {
             let indexPath = NSIndexPath(forRow: row, inSection: 0)
@@ -72,6 +79,9 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
     }
     
+    //
+    // 設定の反映関数
+    //
     func save(goNext: Bool){
         if selectedIndex != nil {
             AppData.People_Data[selectedIndex].Name = nameBox.text
@@ -91,6 +101,9 @@ class SetNameViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
     }
     
+    //
+    // スクロールされたときのチェックボックスの更新
+    //
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if selectedIndex != nil {
             checkbox(selectedIndex)
