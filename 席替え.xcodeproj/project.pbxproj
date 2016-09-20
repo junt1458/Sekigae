@@ -11,12 +11,12 @@
 		2306A7C41C828C4700CB26DF /* whiteback.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306A7C31C828C4700CB26DF /* whiteback.png */; };
 		23248FDF1C82C844005543C2 /* Kazesawa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23248FDE1C82C844005543C2 /* Kazesawa-Bold.ttf */; };
 		23248FE31C82C8CA005543C2 /* bokutachi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 23248FE21C82C8CA005543C2 /* bokutachi.otf */; };
-		23760D661C5DB761005438D6 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D651C5DB761005438D6 /* grid.png */; };
 		23760D6B1C5DCB15005438D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D681C5DCB15005438D6 /* Default-568h@2x.png */; };
 		23760D6C1C5DCB15005438D6 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D691C5DCB15005438D6 /* Default-667h@2x.png */; };
 		23760D6D1C5DCB15005438D6 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D6A1C5DCB15005438D6 /* Default-736h@3x.png */; };
 		23760D6F1C5DCD3C005438D6 /* desk.png in Resources */ = {isa = PBXBuildFile; fileRef = 23760D6E1C5DCD3C005438D6 /* desk.png */; };
 		238819141C7B046400FAD2E7 /* waku.png in Resources */ = {isa = PBXBuildFile; fileRef = 238819131C7B046400FAD2E7 /* waku.png */; };
+		238AE5871D9132BE00E4DD42 /* 席替えチョーク文字３.png in Resources */ = {isa = PBXBuildFile; fileRef = 238AE5861D9132BE00E4DD42 /* 席替えチョーク文字３.png */; };
 		2394732A1C818F3F00B664A4 /* SavePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239473291C818F3F00B664A4 /* SavePhotoViewController.swift */; };
 		23955D811C7058080055A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23955D7F1C7058080055A7B2 /* Main.storyboard */; };
 		23969C3D1C5DE31E001340C2 /* nodesk.png in Resources */ = {isa = PBXBuildFile; fileRef = 23969C3C1C5DE31E001340C2 /* nodesk.png */; };
@@ -65,12 +65,12 @@
 		2306A7C31C828C4700CB26DF /* whiteback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteback.png; sourceTree = "<group>"; };
 		23248FDE1C82C844005543C2 /* Kazesawa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kazesawa-Bold.ttf"; sourceTree = "<group>"; };
 		23248FE21C82C8CA005543C2 /* bokutachi.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bokutachi.otf; sourceTree = "<group>"; };
-		23760D651C5DB761005438D6 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
 		23760D681C5DCB15005438D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		23760D691C5DCB15005438D6 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		23760D6A1C5DCB15005438D6 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		23760D6E1C5DCD3C005438D6 /* desk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desk.png; sourceTree = "<group>"; };
 		238819131C7B046400FAD2E7 /* waku.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waku.png; sourceTree = "<group>"; };
+		238AE5861D9132BE00E4DD42 /* 席替えチョーク文字３.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "席替えチョーク文字３.png"; sourceTree = "<group>"; };
 		239473291C818F3F00B664A4 /* SavePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePhotoViewController.swift; sourceTree = "<group>"; };
 		23955D801C7058080055A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23969C3C1C5DE31E001340C2 /* nodesk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodesk.png; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				23969C3E1C5DE932001340C2 /* woman.png */,
 				23969C3C1C5DE31E001340C2 /* nodesk.png */,
 				23760D6E1C5DCD3C005438D6 /* desk.png */,
-				23760D651C5DB761005438D6 /* grid.png */,
+				238AE5861D9132BE00E4DD42 /* 席替えチョーク文字３.png */,
 				2306A7C11C828B2A00CB26DF /* 138876430504438697227_BG17a_1280.jpg */,
 				2306A7C31C828C4700CB26DF /* whiteback.png */,
 				23248FE21C82C8CA005543C2 /* bokutachi.otf */,
@@ -339,12 +339,12 @@
 				23760D6F1C5DCD3C005438D6 /* desk.png in Resources */,
 				2306A7C21C828B2A00CB26DF /* 138876430504438697227_BG17a_1280.jpg in Resources */,
 				2306A7C41C828C4700CB26DF /* whiteback.png in Resources */,
-				23760D661C5DB761005438D6 /* grid.png in Resources */,
 				23C20A991C5C70E300ECE859 /* Assets.xcassets in Resources */,
 				23969C3F1C5DE932001340C2 /* woman.png in Resources */,
 				23760D6B1C5DCB15005438D6 /* Default-568h@2x.png in Resources */,
 				23760D6D1C5DCB15005438D6 /* Default-736h@3x.png in Resources */,
 				23248FE31C82C8CA005543C2 /* bokutachi.otf in Resources */,
+				238AE5871D9132BE00E4DD42 /* 席替えチョーク文字３.png in Resources */,
 				23248FDF1C82C844005543C2 /* Kazesawa-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

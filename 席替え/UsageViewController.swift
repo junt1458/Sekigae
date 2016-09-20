@@ -18,7 +18,10 @@ class UsageViewController: UIViewController {
         super.viewDidLoad()
         addRefreshControl()
         // Do any additional setup after loading the view.
-        let url = NSURL(string: AppData.baseurl + AppData.dir + AppData.usagePage)
+        let version: AnyObject! = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+        let ver = String(version)  //バージョン情報
+        
+        let url = NSURL(string: String(format: "%@%@%@?ver=%@", AppData.baseurl, AppData.dir, AppData.usagePage, ver))
         let req = NSURLRequest(URL: url!)
         webview.loadRequest(req)
     }
