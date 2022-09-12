@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="net.junki_t.sekigae.NinzuuActivity"
+    android:background="@drawable/background"
+    android:alpha="0.8">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="人数の設定"
+                android:id="@+id/textView3"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="50dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(合計48人まで)"
+                android:id="@+id/textView4"
+                android:textSize="25dp"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="男:"
+                    android:id="@+id/textView5"
+                    android:textSize="40dp"
+                    android:layout_weight="1"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:background="#ffffff"
+                    android:textColor="#000000"
+                    android:textSize="30dp"
+                    android:phoneNumber="false"
+                    android:numeric="integer"
+                    android:hint="10"
+                    android:textColorHint="#939393" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="人"
+                    android:id="@+id/textView6"
+                    android:textSize="40dp"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="女:"
+                    android:id="@+id/textView7"
+                    android:textSize="40dp"
+                    android:layout_weight="1"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText2"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:background="#ffffff"
+                    android:textColor="#000000"
+                    android:textSize="30dp"
+                    android:phoneNumber="false"
+                    android:numeric="integer"
+                    android:hint="10"
+                    android:textColorHint="#939393" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="人"
+                    android:id="@+id/textView8"
+                    android:textSize="40dp"
+                    android:layout_weight="1"
+                    android:textColor="#000000" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="前回のデータを読み込む"
+                android:id="@+id/button7"
+                android:textSize="15dp"
+                android:onClick="loadData" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button8"
+                android:text="次へ"
+                android:onClick="next_Ninzuu"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

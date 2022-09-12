@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="net.junki_t.sekigae.SekikoteiActivity"
+    android:background="@drawable/background"
+    android:alpha="0.8">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.25">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="席固定の設定"
+                    android:id="@+id/textView68"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textIsSelectable="false"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.2">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText97"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText98"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText99"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText100"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText101"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText102"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText103"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText104"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText105"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText106"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText107"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText108"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText109"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText110"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText111"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText112"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText113"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText114"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText115"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText116"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText117"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText118"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText119"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText120"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText121"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText122"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText123"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText124"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText125"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText126"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText127"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText128"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText129"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText130"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText131"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText132"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText133"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText134"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText135"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText136"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText137"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText138"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText139"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText140"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText141"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText142"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText143"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+
+                    <net.junki_t.sekigae.FontFitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nameSetText144"
+                        android:layout_weight="1"
+                        android:background="@drawable/desk"
+                        android:onClick="setkotei" android:clickable="true" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.25">
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
